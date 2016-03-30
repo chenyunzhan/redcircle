@@ -8,10 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let messageController = MessageController()
+        let messageNavController = UINavigationController(rootViewController: messageController)
+        self.viewControllers = [messageNavController]
+        
+
+
         // Do any additional setup after loading the view, typically from a nib.
     }
 

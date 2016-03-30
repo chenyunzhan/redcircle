@@ -16,6 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let userInfo = NSUserDefaults.standardUserDefaults().valueForKey("USER_INFO") as? NSDictionary
+        if userInfo == nil {
+            let loginController = LoginController()
+            let loginNavController = UINavigationController(rootViewController: loginController)
+            self.window?.rootViewController = loginNavController
+//            self.presentViewController(loginController, animated: true, completion: { () -> Void in
+//                
+//            })
+        } else {
+            let homeController = HomeController()
+            self.window?.rootViewController = homeController
+        }
+        
+        
+        
+        
+        SMSSDK.registerApp("111412781a7c4", withSecret: "81008993f3de84d463ccd91cf4bb7509")
+        
+        
         return true
     }
 
