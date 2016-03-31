@@ -10,6 +10,9 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    
+    static let baseURLString = "http://localhost:8080"
 
     var window: UIWindow?
 

@@ -8,10 +8,13 @@
 
 import UIKit
 import SwiftyButton
+import Alamofire
+
 
 class FriendController: UITableViewController {
     
     var friendArray: NSMutableArray?
+    var verifyFriendArray: NSMutableArray?
     
     override func viewDidLoad() {
         self.title = "朋友信息"
@@ -28,6 +31,7 @@ class FriendController: UITableViewController {
     override init(style: UITableViewStyle) {
         super.init(style: UITableViewStyle.Grouped)
         self.friendArray = [NSMutableDictionary(),NSMutableDictionary()]
+        self.verifyFriendArray = NSMutableArray()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -159,23 +163,82 @@ class FriendController: UITableViewController {
     
     func doResigterAction() {
         
+        for var index = 0; index < self.friendArray?.count; ++index {
+            let indexPath = NSIndexPath(forRow: 0, inSection: index)
+            
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+            let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
+            let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
+            let friendDic = self.friendArray![index]
+            friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
+            friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+        }
+        
+        
+        
+        
+        let group = dispatch_group_create();
+        
         for friendDic in self.friendArray! {
-            SMSSDK.commitVerificationCode(friendDic["verify_code_text"] as? String, phoneNumber:friendDic["phone_text"] as? String, zone: "86") { (error) -> Void in
-                if ((error == nil)) {
-                    NSLog("验证成功");
+            if friendDic.count > 0 {
+                
+                let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                
+                dispatch_group_async(group, queue, { () -> Void in
+
+                    SMSSDK.commitVerificationCode(friendDic["verify_code_text"] as? String, phoneNumber:friendDic["phone_text"] as? String, zone: "86") { (error) -> Void in
+                        if ((error == nil)) {
+                            self.verifyFriendArray!.addObject(friendDic)
+                            NSLog("验证成功");
+                            
+                        } else {
+//                            self.verifyFriendArray!.addObject(NSMutableDictionary())
+                            NSLog("错误信息：%@",error);
+                        }
+                    }
                     
-                } else {
-                    NSLog("错误信息：%@",error);
-                    return
-                }
+                    NSThread.sleepForTimeInterval(10)
+
+                })
             }
         }
         
+        
+        dispatch_group_notify(group, dispatch_get_main_queue()) { () -> Void in
+            if self.verifyFriendArray?.count > 0 {
+                
+                let parameters = [
+                    "verifyFriendArray": self.verifyFriendArray as! AnyObject
+                ]
+                
+                
+                Alamofire.request(.POST, AppDelegate.baseURLString + "/register", parameters: parameters, encoding: .JSON)
+                    
+
+            }
+        }
+        
+        
+        
+
         
     }
     
     
     func getVerifyCode(sender:UIButton) {
+        
+        for var index = 0; index < self.friendArray?.count; ++index {
+            let indexPath = NSIndexPath(forRow: 0, inSection: index)
+            
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+            let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
+            let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
+            let friendDic = self.friendArray![index]
+            friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
+            friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+        }
+        
+        
         let phoneText = self.friendArray![sender.tag]["phone_text"] as! String
         SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: phoneText, zone: "86", customIdentifier: nil) { (error) -> Void in
             if ((error == nil)) {
