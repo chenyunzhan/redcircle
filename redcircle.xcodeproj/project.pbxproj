@@ -137,6 +137,7 @@
 				TargetAttributes = {
 					7FC634BD1CAA63A800557D9F = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8EPAQYR3M5;
 					};
 				};
 			};
@@ -344,10 +345,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: chenyunzhan chenyunzhan (P6T3LBLQZH)";
 				INFOPLIST_FILE = redcircle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2eae589f-fc86-4bd1-839e-b8445d0b2cf4";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -359,10 +362,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: chenyunzhan chenyunzhan (P6T3LBLQZH)";
 				INFOPLIST_FILE = redcircle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2eae589f-fc86-4bd1-839e-b8445d0b2cf4";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
 			};
 			name = Release;

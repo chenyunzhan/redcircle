@@ -14,7 +14,7 @@ import Alamofire
 class FriendController: UITableViewController {
     
     var friendArray: NSMutableArray?
-    var verifyFriendArray: NSMutableArray?
+    var verifyFriendArray: [String]?
     
     override func viewDidLoad() {
         self.title = "朋友信息"
@@ -31,7 +31,7 @@ class FriendController: UITableViewController {
     override init(style: UITableViewStyle) {
         super.init(style: UITableViewStyle.Grouped)
         self.friendArray = [NSMutableDictionary(),NSMutableDictionary()]
-        self.verifyFriendArray = NSMutableArray()
+        self.verifyFriendArray = []
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -163,6 +163,9 @@ class FriendController: UITableViewController {
     
     func doResigterAction() {
         
+        self.verifyFriendArray = []
+
+        
         for var index = 0; index < self.friendArray?.count; ++index {
             let indexPath = NSIndexPath(forRow: 0, inSection: index)
             
@@ -180,6 +183,10 @@ class FriendController: UITableViewController {
         let group = dispatch_group_create();
         
         for friendDic in self.friendArray! {
+            print(friendDic)
+            
+            
+            
             if friendDic.count > 0 {
                 
                 let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -188,10 +195,14 @@ class FriendController: UITableViewController {
 
                     SMSSDK.commitVerificationCode(friendDic["verify_code_text"] as? String, phoneNumber:friendDic["phone_text"] as? String, zone: "86") { (error) -> Void in
                         if ((error == nil)) {
-                            self.verifyFriendArray!.addObject(friendDic)
+                            self.verifyFriendArray?.append("success")
                             NSLog("验证成功");
                             
                         } else {
+                            
+                            
+                            self.verifyFriendArray!.append("failure")
+
 //                            self.verifyFriendArray!.addObject(NSMutableDictionary())
                             NSLog("错误信息：%@",error);
                         }
@@ -205,11 +216,15 @@ class FriendController: UITableViewController {
         
         
         dispatch_group_notify(group, dispatch_get_main_queue()) { () -> Void in
-            if self.verifyFriendArray?.count > 0 {
+            
+
+            
+            if self.verifyFriendArray?.count == self.friendArray?.count && self.verifyFriendArray?.contains("failure") != nil {
                 
                 let parameters = [
-                    "verifyFriendArray": self.verifyFriendArray as! AnyObject
+                    "friendArrayMap": self.friendArray as! AnyObject
                 ]
+                
                 
                 
                 Alamofire.request(.POST, AppDelegate.baseURLString + "/register", parameters: parameters, encoding: .JSON)
