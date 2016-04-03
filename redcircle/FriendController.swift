@@ -15,6 +15,7 @@ class FriendController: UITableViewController {
     
     var friendArray: NSMutableArray?
     var verifyFriendArray: [String]?
+    var meInfo: NSDictionary?
     
     override func viewDidLoad() {
         self.title = "朋友信息"
@@ -32,6 +33,7 @@ class FriendController: UITableViewController {
         super.init(style: UITableViewStyle.Grouped)
         self.friendArray = [NSMutableDictionary(),NSMutableDictionary()]
         self.verifyFriendArray = []
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -222,7 +224,8 @@ class FriendController: UITableViewController {
             if self.verifyFriendArray?.count == self.friendArray?.count && self.verifyFriendArray?.contains("failure") != nil {
                 
                 let parameters = [
-                    "friendArrayMap": self.friendArray as! AnyObject
+                    "friendArrayMap": self.friendArray as! AnyObject,
+                    "meInfo": self.meInfo as! AnyObject
                 ]
                 
                 

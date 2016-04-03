@@ -107,8 +107,8 @@ class RegisterController: UIViewController {
     func gotoFriendController() {
         
         let friendController = FriendController(style: UITableViewStyle.Grouped)
+        friendController.meInfo = NSDictionary(dictionary: ["me_phone":(self.userPhoneTextField?.text)!])
         self.navigationController?.pushViewController(friendController, animated: true)
-        
         
         
         /*
