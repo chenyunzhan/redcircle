@@ -9,8 +9,11 @@
 import UIKit
 import SnapKit
 import SwiftyButton
+import Alamofire
 
 class LoginController: UIViewController {
+    
+    var userPhoneTextField: UITextField?
     
     override func viewDidLoad() {
         
@@ -39,6 +42,7 @@ class LoginController: UIViewController {
         let userPhoneTextField = UITextField()
         userPhoneTextField.placeholder = "请输入您的手机号"
         self.view.addSubview(userPhoneTextField)
+        self.userPhoneTextField = userPhoneTextField
         
         
         let verifyCodeTextField = UITextField()
@@ -63,6 +67,7 @@ class LoginController: UIViewController {
         loginButton.cornerRadius = 5
         loginButton.setTitle("登录", forState: UIControlState.Normal)
         loginButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        loginButton.addTarget(self, action: "doLoginAction", forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(loginButton)
         
@@ -154,6 +159,39 @@ class LoginController: UIViewController {
     func gotoRegisterController() {
         let registerController = RegisterController()
         self.navigationController?.pushViewController(registerController, animated: true)
+    }
+    
+    func getVerifyCode(sender:UIButton) {
+        SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: self.userPhoneTextField!.text, zone: "86", customIdentifier: nil) { (error) -> Void in
+            if ((error == nil)) {
+                NSLog("获取验证码成功");
+            } else {
+                NSLog("错误信息：%@",error);
+            }
+        }
+    }
+    
+    
+    func doLoginAction() {
+        SMSSDK.commitVerificationCode(self.userPhoneTextField?.text, phoneNumber: self.userPhoneTextField?.text, zone: "86") { (error) -> Void in
+            if ((error == nil) || true) {
+                NSLog("验证成功");
+                let parameters = [
+                    "mePhone": self.userPhoneTextField?.text as! AnyObject,
+                ]
+                Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
+                    if response.result.isSuccess {
+                        let homeController = HomeController()
+                        ((UIApplication.sharedApplication().delegate) as! AppDelegate).window?.rootViewController = homeController
+                        
+                        NSUserDefaults.standardUserDefaults().setObject(self.userPhoneTextField!.text, forKey: "ME_PHONE")
+
+                    }
+                }
+            } else {
+                NSLog("错误信息：%@",error);
+            }
+        }
     }
     
 }

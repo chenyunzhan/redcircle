@@ -230,7 +230,24 @@ class FriendController: UITableViewController {
                 
                 
                 
-                Alamofire.request(.POST, AppDelegate.baseURLString + "/register", parameters: parameters, encoding: .JSON)
+                
+                Alamofire.request(.POST, AppDelegate.baseURLString + "/register", parameters: parameters, encoding: .JSON).responseJSON { response in
+                    
+                    if(response.result.isSuccess) {
+                        let success = response.result.value!["success"]!! as! NSNumber
+                        if(success.boolValue) {
+                            let alertController = UIAlertController(title: "提示", message: "注册成功", preferredStyle: UIAlertControllerStyle.Alert)
+                            let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                            alertController.addAction(cancelAction)
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                            self.performSelector("backLoginController", withObject: self, afterDelay: 3)
+                        } else {
+                            
+                        }
+
+                    }
+
+                }
                     
 
             }
@@ -265,5 +282,9 @@ class FriendController: UITableViewController {
                 NSLog("错误信息：%@",error);
             }
         }
+    }
+    
+    func backLoginController() {
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }

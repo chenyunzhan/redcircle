@@ -12,6 +12,8 @@
 		7FC634C71CAA63A800557D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC634C51CAA63A800557D9F /* Main.storyboard */; };
 		7FC634C91CAA63A800557D9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FC634C81CAA63A800557D9F /* Assets.xcassets */; };
 		7FC634CC1CAA63A800557D9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC634CA1CAA63A800557D9F /* LaunchScreen.storyboard */; };
+		7FD535331CB39EF4007D23C7 /* MeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD535321CB39EF4007D23C7 /* MeController.swift */; };
+		7FD535351CB39F46007D23C7 /* BookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD535341CB39F46007D23C7 /* BookController.swift */; };
 		7FD6928F1CAA7D3900D17E7B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD6928E1CAA7D3900D17E7B /* LoginController.swift */; };
 		7FD692911CAA7F4700D17E7B /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD692901CAA7F4700D17E7B /* MessageController.swift */; };
 		7FFB63741CAB5C5F008C7AAD /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB63731CAB5C5F008C7AAD /* RegisterController.swift */; };
@@ -28,6 +30,8 @@
 		7FC634C81CAA63A800557D9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FC634CB1CAA63A800557D9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FC634CD1CAA63A800557D9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FD535321CB39EF4007D23C7 /* MeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeController.swift; sourceTree = "<group>"; };
+		7FD535341CB39F46007D23C7 /* BookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookController.swift; sourceTree = "<group>"; };
 		7FD6928E1CAA7D3900D17E7B /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		7FD692901CAA7F4700D17E7B /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		7FFB63731CAB5C5F008C7AAD /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 				7FC634CD1CAA63A800557D9F /* Info.plist */,
 				7FFB63751CAB78E5008C7AAD /* redcircle-Bridging-Header.h */,
 				7FFB63791CAB9BB5008C7AAD /* FriendController.swift */,
+				7FD535321CB39EF4007D23C7 /* MeController.swift */,
+				7FD535341CB39F46007D23C7 /* BookController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -229,7 +235,9 @@
 				7FFB637A1CAB9BB5008C7AAD /* FriendController.swift in Sources */,
 				7FC634C41CAA63A800557D9F /* HomeController.swift in Sources */,
 				7FD6928F1CAA7D3900D17E7B /* LoginController.swift in Sources */,
+				7FD535331CB39EF4007D23C7 /* MeController.swift in Sources */,
 				7FC634C21CAA63A800557D9F /* AppDelegate.swift in Sources */,
+				7FD535351CB39F46007D23C7 /* BookController.swift in Sources */,
 				7FD692911CAA7F4700D17E7B /* MessageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
