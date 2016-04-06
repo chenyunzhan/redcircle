@@ -14,6 +14,7 @@ import Alamofire
 class LoginController: UIViewController {
     
     var userPhoneTextField: UITextField?
+    var logoImageView: UIImageView?
     
     override func viewDidLoad() {
         
@@ -33,7 +34,7 @@ class LoginController: UIViewController {
         
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: "pix")
-        
+        self.logoImageView = logoImageView
         self.view.addSubview(logoImageView)
         
         
@@ -81,7 +82,7 @@ class LoginController: UIViewController {
         self.view.addSubview(verifyCodeLineView)
         
         userPhoneTextField.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(self.view).offset(280)
+            make.top.equalTo(logoImageView.snp_bottom).offset(20)
             make.right.equalTo(self.view).offset(-20)
             make.left.equalTo(self.view).offset(20)
             make.height.equalTo(40)
@@ -152,6 +153,9 @@ class LoginController: UIViewController {
         registerButton.addTarget(self, action: "gotoRegisterController", forControlEvents: UIControlEvents.TouchUpInside)
         
         
+        if UIScreen.mainScreen().bounds.size.height == 480 {
+            self.registerForKeyboardNotifications()
+        }
         
     }
     
@@ -192,6 +196,31 @@ class LoginController: UIViewController {
                 NSLog("错误信息：%@",error);
             }
         }
+    }
+    
+    func registerForKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWasShown(notification : NSNotification) {
+        self.logoImageView?.snp_updateConstraints(closure: { (make) -> Void in
+            make.top.equalTo(self.view).offset(-100)
+            make.centerX.equalTo(self.view.snp_centerX)
+            make.width.equalTo(150)
+            make.height.equalTo(150)
+
+        })
+    }
+    
+    func keyboardWillBeHidden(notification : NSNotification) {
+        self.logoImageView?.snp_updateConstraints(closure: { (make) -> Void in
+            make.top.equalTo(self.view).offset(100)
+            make.centerX.equalTo(self.view.snp_centerX)
+            make.width.equalTo(150)
+            make.height.equalTo(150)
+            
+        })
     }
     
 }

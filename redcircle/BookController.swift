@@ -16,6 +16,14 @@ class BookController: UITableViewController {
     
     var tableData: [JSON] = []
     
+    override init(style: UITableViewStyle) {
+        super.init(style: UITableViewStyle.Grouped)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         let mePhone = NSUserDefaults.standardUserDefaults().objectForKey("ME_PHONE")
         Alamofire.request(.GET, AppDelegate.baseURLString + "/getFriends", parameters: ["mePhone": mePhone!]).responseJSON { (response) -> Void in
@@ -47,5 +55,33 @@ class BookController: UITableViewController {
         let cell = UITableViewCell()
         cell.textLabel?.text = friend["friendPhone"].string
         return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let friends = self.tableData[section]
+        let friend = friends["friend"]
+        return friend["friendPhone"].string
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let friends = self.tableData[indexPath.section]
+        let ffriend = friends["ffriend"].arrayValue
+        let friend = ffriend[indexPath.row]
+        
+        
+        //新建一个聊天会话View Controller对象
+        let chat = RCConversationViewController()
+        //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
+        chat.conversationType = RCConversationType.ConversationType_PRIVATE
+        //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
+        chat.targetId = friend["friendPhone"].string
+        //设置聊天会话界面要显示的标题
+        chat.title = friend["friendPhone"].string
+        //显示聊天会话界面
+        chat.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(chat, animated: true)
     }
 }

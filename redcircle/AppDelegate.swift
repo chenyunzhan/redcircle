@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
-    static let baseURLString = "http://localhost:8080"
+    static let baseURLString = "http://192.168.1.103:8080"
 
     var window: UIWindow?
 
@@ -36,6 +36,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         SMSSDK.registerApp("111412781a7c4", withSecret: "81008993f3de84d463ccd91cf4bb7509")
+        
+        RCIM.sharedRCIM().initWithAppKey("qf3d5gbj3ufqh")
+        
+        
+//        RCIM.sharedRCIM().connectWithToken("Keyqf3d5gbj3ufqh",
+//            success: { (userId) -> Void in
+//                print("登陆成功。当前登录的用户ID：\(userId)")
+//            }, error: { (status) -> Void in
+//                print("登陆的错误码为:\(status.rawValue)")
+//            }, tokenIncorrect: {
+//                //token过期或者不正确。
+//                //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
+//                //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
+//                print("token错误")
+//        })
         
         
         return true

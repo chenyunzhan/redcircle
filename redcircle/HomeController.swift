@@ -16,8 +16,8 @@ class HomeController: UITabBarController {
         
         
         let messageController = MessageController()
-        let meController = MeController()
-        let bookController = BookController()
+        let meController = MeController(style: .Grouped)
+        let bookController = BookController(style: .Grouped)
         
         let messageNavController = UINavigationController(rootViewController: messageController)
         let meNavController = UINavigationController(rootViewController: meController)

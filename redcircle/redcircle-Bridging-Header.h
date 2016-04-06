@@ -3,3 +3,4 @@
 //
 
 #import <SMS_SDK/SMSSDK.h>
+#import <RongIMKit/RongIMKit.h>

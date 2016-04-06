@@ -9,7 +9,16 @@
 import UIKit
 
 
-class MeController: UIViewController {
+class MeController: UITableViewController {
+    
+    override init(style: UITableViewStyle) {
+        super.init(style: UITableViewStyle.Grouped)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         
     }
