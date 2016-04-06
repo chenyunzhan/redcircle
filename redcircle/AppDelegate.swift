@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
-    static let baseURLString = "http://192.168.1.103:8080"
+    static let baseURLString = "http://192.168.1.101:8080"
 
     var window: UIWindow?
 

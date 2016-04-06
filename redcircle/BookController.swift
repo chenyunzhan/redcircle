@@ -73,7 +73,7 @@ class BookController: UITableViewController {
         
         
         //新建一个聊天会话View Controller对象
-        let chat = RCConversationViewController()
+        let chat = ChatController()
         //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
         chat.conversationType = RCConversationType.ConversationType_PRIVATE
         //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
