@@ -25,8 +25,11 @@ class BookController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        let mePhone = NSUserDefaults.standardUserDefaults().objectForKey("ME_PHONE")
-        Alamofire.request(.GET, AppDelegate.baseURLString + "/getFriends", parameters: ["mePhone": mePhone!]).responseJSON { (response) -> Void in
+        
+        self.title = "朋友"
+        let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
+        let mePhone = userDic!["mePhone"]
+        Alamofire.request(.GET, AppDelegate.baseURLString + "/getFriends", parameters: ["mePhone": mePhone!!]).responseJSON { (response) -> Void in
             print(response.result.value)
             let tableData = JSON(response.result.value!).arrayValue
             self.tableData = tableData

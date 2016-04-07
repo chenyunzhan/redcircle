@@ -11,8 +11,8 @@ import Foundation
 
 class ChatController: RCConversationViewController {
     
-    override func sendMessage(messageContent: RCMessageContent!, pushContent: String!) {
-        super.sendMessage(messageContent, pushContent: pushContent)
-    }
+//    override func sendMessage(messageContent: RCMessageContent!, pushContent: String!) {
+//        super.sendMessage(messageContent, pushContent: pushContent)
+//    }
     
 }

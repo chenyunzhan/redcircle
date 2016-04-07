@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		613FE8B81CB54ED90029CD8C /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613FE8B71CB54ED90029CD8C /* ChatController.swift */; };
+		7F16CF0E1CB632EB004A74F5 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16CF0D1CB632EB004A74F5 /* CellModel.swift */; };
+		7F16CF101CB6464B004A74F5 /* ModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16CF0F1CB6464B004A74F5 /* ModifyController.swift */; };
 		7FC634C21CAA63A800557D9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC634C11CAA63A800557D9F /* AppDelegate.swift */; };
 		7FC634C41CAA63A800557D9F /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC634C31CAA63A800557D9F /* HomeController.swift */; };
 		7FC634C71CAA63A800557D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC634C51CAA63A800557D9F /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 		613FE8B71CB54ED90029CD8C /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		617F96891CB544C00032BF1C /* redcircle_t_red_user.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = redcircle_t_red_user.sql; sourceTree = "<group>"; };
 		617F968A1CB544C00032BF1C /* 红圈开发证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈开发证书.p12"; sourceTree = "<group>"; };
+		7F16CF0D1CB632EB004A74F5 /* CellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		7F16CF0F1CB6464B004A74F5 /* ModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyController.swift; sourceTree = "<group>"; };
 		7FC634BE1CAA63A800557D9F /* redcircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = redcircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC634C11CAA63A800557D9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FC634C31CAA63A800557D9F /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,14 @@
 			path = doc;
 			sourceTree = "<group>";
 		};
+		7F16CF0C1CB632CD004A74F5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				7F16CF0D1CB632EB004A74F5 /* CellModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		7FC634B51CAA63A800557D9F = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +108,7 @@
 		7FC634C01CAA63A800557D9F /* redcircle */ = {
 			isa = PBXGroup;
 			children = (
+				7F16CF0C1CB632CD004A74F5 /* model */,
 				617F96881CB544C00032BF1C /* doc */,
 				7FC634C11CAA63A800557D9F /* AppDelegate.swift */,
 				7FC634C31CAA63A800557D9F /* HomeController.swift */,
@@ -111,6 +124,7 @@
 				7FD535321CB39EF4007D23C7 /* MeController.swift */,
 				7FD535341CB39F46007D23C7 /* BookController.swift */,
 				613FE8B71CB54ED90029CD8C /* ChatController.swift */,
+				7F16CF0F1CB6464B004A74F5 /* ModifyController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -249,11 +263,13 @@
 				7FFB63741CAB5C5F008C7AAD /* RegisterController.swift in Sources */,
 				7FFB637A1CAB9BB5008C7AAD /* FriendController.swift in Sources */,
 				7FC634C41CAA63A800557D9F /* HomeController.swift in Sources */,
+				7F16CF0E1CB632EB004A74F5 /* CellModel.swift in Sources */,
 				7FD6928F1CAA7D3900D17E7B /* LoginController.swift in Sources */,
 				7FD535331CB39EF4007D23C7 /* MeController.swift in Sources */,
 				7FC634C21CAA63A800557D9F /* AppDelegate.swift in Sources */,
 				7FD535351CB39F46007D23C7 /* BookController.swift in Sources */,
 				7FD692911CAA7F4700D17E7B /* MessageController.swift in Sources */,
+				7F16CF101CB6464B004A74F5 /* ModifyController.swift in Sources */,
 				613FE8B81CB54ED90029CD8C /* ChatController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

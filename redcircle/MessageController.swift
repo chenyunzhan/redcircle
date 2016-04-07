@@ -13,6 +13,8 @@ import Alamofire
 class MessageController: RCConversationListViewController {
     override func viewDidLoad() {
         
+        self.title = "消息"
+        
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
         

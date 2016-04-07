@@ -187,8 +187,8 @@ class LoginController: UIViewController {
                     if response.result.isSuccess {
                         let homeController = HomeController()
                         ((UIApplication.sharedApplication().delegate) as! AppDelegate).window?.rootViewController = homeController
-                        
-                        NSUserDefaults.standardUserDefaults().setObject(self.userPhoneTextField!.text, forKey: "ME_PHONE")
+                        let userDic = response.result.value as? NSDictionary
+                        NSUserDefaults.standardUserDefaults().setObject(userDic, forKey: "USER_INFO")
 
                     }
                 }
