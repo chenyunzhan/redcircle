@@ -27,8 +27,8 @@ DROP TABLE IF EXISTS `t_red_user`;
 CREATE TABLE `t_red_user` (
   `me_phone` varchar(45) NOT NULL,
   `friend_phone` varchar(45) NOT NULL,
-  `sex` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
+  `sex` varchar(45) DEFAULT '',
+  `name` varchar(45) DEFAULT '',
   PRIMARY KEY (`me_phone`,`friend_phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +39,7 @@ CREATE TABLE `t_red_user` (
 
 LOCK TABLES `t_red_user` WRITE;
 /*!40000 ALTER TABLE `t_red_user` DISABLE KEYS */;
-INSERT INTO `t_red_user` VALUES ('187','123',NULL,NULL),('187','456',NULL,NULL);
+INSERT INTO `t_red_user` VALUES ('15891739884','1111111111111','',''),('15891739884','15891739884','',''),('15891739884','18706734109','',''),('18681831905','111','',''),('18681831905','18681831905','',''),('18681831905','222','',''),('18706734109','15891739884','','Chenyunzhan'),('18706734109','18611206039','','Chenyunzhan'),('18706734109','18706734109','','Chenyunzhan');
 /*!40000 ALTER TABLE `t_red_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-03 22:41:07
+-- Dump completed on 2016-04-07 23:05:00

@@ -24,6 +24,7 @@ class ModifyController: UIViewController {
         
         let textField = UITextField()
         textField.placeholder = "请输入新的" + self.subTitle
+        self.textField = textField
         self.view.addSubview(textField)
         
         let lineView = UIView()
