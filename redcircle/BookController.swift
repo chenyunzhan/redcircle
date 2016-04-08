@@ -56,7 +56,12 @@ class BookController: UITableViewController {
         
         
         let cell = UITableViewCell()
-        cell.textLabel?.text = friend["friendPhone"].string
+        let name = friend["name"].string
+        if name != nil {
+            cell.textLabel?.text = friend["name"].string
+        } else {
+            cell.textLabel?.text = friend["mePhone"].string
+        }
         return cell
     }
     
@@ -80,9 +85,13 @@ class BookController: UITableViewController {
         //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
         chat.conversationType = RCConversationType.ConversationType_PRIVATE
         //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
-        chat.targetId = friend["friendPhone"].string
+        chat.targetId = friend["mePhone"].string
         //设置聊天会话界面要显示的标题
-        chat.title = friend["friendPhone"].string
+        if friend["name"].string != nil {
+            chat.title = friend["name"].string
+        } else {
+            chat.title = friend["mePhone"].string
+        }
         //显示聊天会话界面
         chat.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chat, animated: true)

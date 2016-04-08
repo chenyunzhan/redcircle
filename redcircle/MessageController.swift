@@ -29,8 +29,9 @@ class MessageController: RCConversationListViewController {
         self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
             RCConversationType.ConversationType_GROUP.rawValue])
         
-        let mePhone = NSUserDefaults.standardUserDefaults().objectForKey("ME_PHONE")
-        Alamofire.request(.GET, AppDelegate.baseURLString + "/getRongCloudToken", parameters: ["mePhone": mePhone!]).responseJSON { (response) -> Void in
+        let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
+        let mePhone = userDic!["mePhone"]
+        Alamofire.request(.GET, AppDelegate.baseURLString + "/getRongCloudToken", parameters: ["mePhone": mePhone!!]).responseJSON { (response) -> Void in
             print(response.request)
             print(response.result.value)
             let code = response.result.value?.valueForKey("code") as! String

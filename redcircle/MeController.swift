@@ -44,7 +44,8 @@ class MeController: UITableViewController {
         self.tableData?.addObject(cellModel3)
         self.tableData?.addObject(cellModel2)
         
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"userInfoChange",
+            name: "USER_INFO_CHANGE", object: nil)
     }
     
     
@@ -71,5 +72,10 @@ class MeController: UITableViewController {
         modifyController.subTitle = cellModel.title
         modifyController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(modifyController, animated: true)
+    }
+    
+    func userInfoChange () {
+        self.viewDidLoad()
+        self.tableView.reloadData()
     }
 }

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        var userInfo = NSUserDefaults.standardUserDefaults().valueForKey("USER_INFO") as? NSDictionary
+        let userInfo = NSUserDefaults.standardUserDefaults().valueForKey("USER_INFO") as? NSDictionary
         if userInfo == nil {
             let loginController = LoginController()
             let loginNavController = UINavigationController(rootViewController: loginController)

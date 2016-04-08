@@ -30,7 +30,7 @@ CREATE TABLE `t_red_user` (
   `sex` varchar(45) DEFAULT '',
   `name` varchar(45) DEFAULT '',
   PRIMARY KEY (`me_phone`,`friend_phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -66,7 +66,17 @@ class ModifyController: UIViewController {
         Alamofire.request(.POST, AppDelegate.baseURLString + "/modify", parameters: parameters, encoding: .JSON).responseJSON { response in
             if response.result.isSuccess {
                 
-                
+                let parameters = [
+                    "mePhone": mePhone as! String
+                ]
+                Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
+                    if response.result.isSuccess {
+                        let userDic = response.result.value as? NSDictionary
+                        NSUserDefaults.standardUserDefaults().setObject(userDic, forKey: "USER_INFO")
+                        NSNotificationCenter.defaultCenter().postNotificationName("USER_INFO_CHANGE", object: self)
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }
+                }
             }
         }
     }
