@@ -12,7 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
-    static let baseURLString = "http://localhost:8080"
+//    static let baseURLString = "http://localhost:8080"
+    static let baseURLString = "http://redcircle.tiger.mopaasapp.com"
+
 
     var window: UIWindow?
 

@@ -57,7 +57,7 @@ class BookController: UITableViewController {
         
         let cell = UITableViewCell()
         let name = friend["name"].string
-        if name != nil {
+        if name != "" {
             cell.textLabel?.text = friend["name"].string
         } else {
             cell.textLabel?.text = friend["mePhone"].string
@@ -87,7 +87,7 @@ class BookController: UITableViewController {
         //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
         chat.targetId = friend["mePhone"].string
         //设置聊天会话界面要显示的标题
-        if friend["name"].string != nil {
+        if friend["name"].string != "" {
             chat.title = friend["name"].string
         } else {
             chat.title = friend["mePhone"].string
