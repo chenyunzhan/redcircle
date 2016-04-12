@@ -12,7 +12,7 @@ import SwiftyJSON
 
 
 
-class BookController: UITableViewController, RCIMUserInfoDataSource {
+class BookController: UITableViewController {
     
     var tableData: [JSON] = []
     
@@ -40,7 +40,6 @@ class BookController: UITableViewController, RCIMUserInfoDataSource {
         }
         
         
-        RCIM.sharedRCIM().userInfoDataSource = self
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -102,7 +101,5 @@ class BookController: UITableViewController, RCIMUserInfoDataSource {
     }
     
     
-    func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
-        print(userId+"dddddddddddddddddddddddddddddddddddddddddddddd")
-    }
+    
 }

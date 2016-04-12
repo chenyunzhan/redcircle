@@ -10,10 +10,11 @@ import UIKit
 import Alamofire
 
 
-class MessageController: RCConversationListViewController {
+class MessageController: RCConversationListViewController, RCIMUserInfoDataSource{
     override func viewDidLoad() {
         
         self.title = "消息"
+        RCIM.sharedRCIM().userInfoDataSource = self
         
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
@@ -72,5 +73,20 @@ class MessageController: RCConversationListViewController {
         let chat = RCConversationViewController(conversationType: model.conversationType, targetId: model.targetId)
         chat.title = model.conversationTitle;
         self.navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    
+    func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
+        let parameters = [
+            "mePhone": userId,
+            ]
+        Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
+            if response.result.isSuccess {
+                let userDic = response.result.value as? NSDictionary
+                completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as! String, portrait: userDic![""]?.string))
+            }
+        }
+
+        
     }
 }
