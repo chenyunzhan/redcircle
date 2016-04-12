@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
 //    static let baseURLString = "http://localhost:8080"
-    static let baseURLString = "http://redcircle.tiger.mopaasapp.com"
+//    static let baseURLString = "http://redcircle.tiger.mopaasapp.com"
+    static let baseURLString = "http://192.168.1.103:8080"
 
 
     var window: UIWindow?
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        self.window?.backgroundColor = UIColor.lightGrayColor()
         let userInfo = NSUserDefaults.standardUserDefaults().valueForKey("USER_INFO") as? NSDictionary
         if userInfo == nil {
             let loginController = LoginController()

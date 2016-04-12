@@ -12,7 +12,7 @@ import SwiftyJSON
 
 
 
-class BookController: UITableViewController {
+class BookController: UITableViewController, RCIMUserInfoDataSource {
     
     var tableData: [JSON] = []
     
@@ -26,6 +26,7 @@ class BookController: UITableViewController {
     
     override func viewDidLoad() {
         
+        
         self.title = "朋友"
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
         let mePhone = userDic!["mePhone"]
@@ -37,6 +38,9 @@ class BookController: UITableViewController {
             self.tableView.reloadData()
             print(response.request)
         }
+        
+        
+        RCIM.sharedRCIM().userInfoDataSource = self
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -95,5 +99,10 @@ class BookController: UITableViewController {
         //显示聊天会话界面
         chat.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    
+    func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
+        print(userId+"dddddddddddddddddddddddddddddddddddddddddddddd")
     }
 }

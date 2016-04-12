@@ -38,23 +38,41 @@ class MeController: UITableViewController {
         cellModel3.title = "姓名"
         cellModel3.desc = userDic!["name"] as! String
         
+        let cellModel4 = CellModel()
+        cellModel4.title = "退出登录"
+        cellModel4.desc = ""
+        
+        
         
         self.tableData = NSMutableArray()
-        self.tableData?.addObject(cellModel1)
-        self.tableData?.addObject(cellModel3)
-        self.tableData?.addObject(cellModel2)
+        
+        
+        let sectionArray1 = NSMutableArray()
+        sectionArray1.addObject(cellModel1)
+        sectionArray1.addObject(cellModel3)
+        sectionArray1.addObject(cellModel2)
+        
+        let sectionArray2 = NSMutableArray()
+        sectionArray2.addObject(cellModel4)
+        
+        self.tableData?.addObject(sectionArray1)
+        self.tableData?.addObject(sectionArray2)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"userInfoChange",
             name: "USER_INFO_CHANGE", object: nil)
     }
     
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return (self.tableData?.count)!
     }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionArray = self.tableData![section]
+        return (sectionArray.count)!
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellModel = self.tableData![indexPath.row] as! CellModel
+        let cellModel = self.tableData![indexPath.section][indexPath.row] as! CellModel
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         cell.textLabel?.text = cellModel.title
@@ -66,12 +84,20 @@ class MeController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let cellModel = self.tableData![indexPath.row] as! CellModel
-        let modifyController = ModifyController()
-        modifyController.subTitle = cellModel.title
-        modifyController.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(modifyController, animated: true)
+        if (indexPath.section == 0) {
+            let cellModel = self.tableData![indexPath.section][indexPath.row] as! CellModel
+            let modifyController = ModifyController()
+            modifyController.subTitle = cellModel.title
+            modifyController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(modifyController, animated: true)
+        } else {
+            let loginController = LoginController()
+            let loginNavController = UINavigationController(rootViewController: loginController)
+            UIView.transitionFromView(self.view, toView: loginController.view, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: { (Bool) -> Void in
+                ((UIApplication.sharedApplication().delegate) as! AppDelegate).window?.rootViewController = loginNavController
+            })
+        }
+
     }
     
     func userInfoChange () {
