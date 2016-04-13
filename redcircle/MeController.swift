@@ -72,7 +72,7 @@ class MeController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellModel = self.tableData![indexPath.section][indexPath.row] as! CellModel
+        let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         cell.textLabel?.text = cellModel.title
@@ -85,7 +85,7 @@ class MeController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 0) {
-            let cellModel = self.tableData![indexPath.section][indexPath.row] as! CellModel
+            let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
             let modifyController = ModifyController()
             modifyController.subTitle = cellModel.title
             modifyController.hidesBottomBarWhenPushed = true

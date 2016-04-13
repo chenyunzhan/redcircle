@@ -15,6 +15,7 @@ import FontAwesome_swift
 class LoginController: UIViewController {
     
     var userPhoneTextField: UITextField?
+    var verifyCodeTextField: UITextField?
     var logoImageView: UIImageView?
     
     override func viewDidLoad() {
@@ -51,6 +52,7 @@ class LoginController: UIViewController {
         let verifyCodeTextField = UITextField()
         verifyCodeTextField.placeholder = "请输入验证码"
         self.view.addSubview(verifyCodeTextField)
+        self.verifyCodeTextField = verifyCodeTextField;
         
         let verifyCodeButton = SwiftyButton()
         verifyCodeButton.buttonColor = UIColor.redColor()
@@ -179,7 +181,7 @@ class LoginController: UIViewController {
     
     
     func doLoginAction() {
-        SMSSDK.commitVerificationCode(self.userPhoneTextField?.text, phoneNumber: self.userPhoneTextField?.text, zone: "86") { (error) -> Void in
+        SMSSDK.commitVerificationCode(self.verifyCodeTextField?.text, phoneNumber: self.userPhoneTextField?.text, zone: "86") { (error) -> Void in
             if ((error == nil)) {
                 NSLog("验证成功");
                 let parameters = [
