@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 //    static let baseURLString = "http://localhost:8080"
 //    static let baseURLString = "http://redcircle.tiger.mopaasapp.com"
-    static let baseURLString = "http://192.168.1.103:8080"
+    static let baseURLString = "http://192.168.1.108:8080"
 
 
     var window: UIWindow?

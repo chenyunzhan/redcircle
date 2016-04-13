@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import SwiftyButton
 import Alamofire
+import FontAwesome_swift
 
 class LoginController: UIViewController {
     
@@ -33,7 +34,8 @@ class LoginController: UIViewController {
         
         
         let logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: "pix")
+//        logoImageView.image = UIImage(named: "pix")
+        logoImageView.image = UIImage.fontAwesomeIconWithName(.CircleO, textColor: UIColor.redColor(), size: CGSizeMake(200, 200))
         self.logoImageView = logoImageView
         self.view.addSubview(logoImageView)
         
@@ -136,10 +138,10 @@ class LoginController: UIViewController {
 
         
         logoImageView.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(self.view).offset(100)
+            make.top.equalTo(self.view).offset(50)
             make.centerX.equalTo(self.view.snp_centerX)
-            make.width.equalTo(150)
-            make.height.equalTo(150)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
         }
         
         loginButton.snp_makeConstraints { (make) -> Void in
@@ -178,7 +180,7 @@ class LoginController: UIViewController {
     
     func doLoginAction() {
         SMSSDK.commitVerificationCode(self.userPhoneTextField?.text, phoneNumber: self.userPhoneTextField?.text, zone: "86") { (error) -> Void in
-            if ((error == nil) || true) {
+            if ((error == nil)) {
                 NSLog("验证成功");
                 let parameters = [
                     "mePhone": self.userPhoneTextField?.text as! AnyObject,
@@ -207,20 +209,26 @@ class LoginController: UIViewController {
         self.logoImageView?.snp_updateConstraints(closure: { (make) -> Void in
             make.top.equalTo(self.view).offset(-100)
             make.centerX.equalTo(self.view.snp_centerX)
-            make.width.equalTo(150)
-            make.height.equalTo(150)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
 
         })
     }
     
     func keyboardWillBeHidden(notification : NSNotification) {
         self.logoImageView?.snp_updateConstraints(closure: { (make) -> Void in
-            make.top.equalTo(self.view).offset(100)
+            make.top.equalTo(self.view).offset(50)
             make.centerX.equalTo(self.view.snp_centerX)
-            make.width.equalTo(150)
-            make.height.equalTo(150)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
             
         })
     }
+    
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.userPhoneTextField?.resignFirstResponder()
+    }
+
     
 }

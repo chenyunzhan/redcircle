@@ -106,22 +106,17 @@ class RegisterController: UIViewController {
     
     func gotoFriendController() {
         
-        let friendController = FriendController(style: UITableViewStyle.Grouped)
-        friendController.meInfo = NSDictionary(dictionary: ["me_phone":(self.userPhoneTextField?.text)!])
-        self.navigationController?.pushViewController(friendController, animated: true)
-        
-        
-        /*
         SMSSDK.commitVerificationCode(self.verifyCodeTextField?.text, phoneNumber: self.userPhoneTextField?.text, zone: "86") { (error) -> Void in
             if ((error == nil)) {
                 NSLog("验证成功");
                 
-                let friendController = FriendController()
+                let friendController = FriendController(style: UITableViewStyle.Grouped)
+                friendController.meInfo = NSDictionary(dictionary: ["me_phone":(self.userPhoneTextField?.text)!])
                 self.navigationController?.pushViewController(friendController, animated: true)
             } else {
                 NSLog("错误信息：%@",error);
             }
         }
-        */
+        
     }
 }

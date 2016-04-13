@@ -96,6 +96,10 @@ class MeController: UITableViewController {
             UIView.transitionFromView(self.view, toView: loginController.view, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: { (Bool) -> Void in
                 ((UIApplication.sharedApplication().delegate) as! AppDelegate).window?.rootViewController = loginNavController
             })
+            
+            let appDomain = NSBundle.mainBundle().bundleIdentifier
+            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+
         }
 
     }

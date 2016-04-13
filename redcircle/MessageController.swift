@@ -71,7 +71,8 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
     override func onSelectedTableRow(conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, atIndexPath indexPath: NSIndexPath!) {
         //打开会话界面
         let chat = RCConversationViewController(conversationType: model.conversationType, targetId: model.targetId)
-        chat.title = model.conversationTitle;
+        chat.title = model.conversationTitle
+        chat.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chat, animated: true)
     }
     

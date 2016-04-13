@@ -221,7 +221,7 @@ class FriendController: UITableViewController {
             
 
             
-            if self.verifyFriendArray?.count == self.friendArray?.count && self.verifyFriendArray?.contains("failure") != nil {
+            if self.verifyFriendArray?.count == self.friendArray?.count && self.verifyFriendArray?.contains("failure") == nil {
                 
                 let parameters = [
                     "friendArrayMap": self.friendArray as! AnyObject,
