@@ -391,12 +391,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: chenyunzhan chenyunzhan (P6T3LBLQZH)";
 				INFOPLIST_FILE = redcircle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f4d9a8d0-2948-436f-a255-8e5b6cb167da";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -409,11 +411,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: chenyunzhan chenyunzhan (8PWWXHNFJ7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: chenyunzhan chenyunzhan (8PWWXHNFJ7)";
 				INFOPLIST_FILE = redcircle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f4d9a8d0-2948-436f-a255-8e5b6cb167da";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
