@@ -16,6 +16,7 @@ class FriendController: UITableViewController {
     var friendArray: NSMutableArray?
     var verifyFriendArray: [String]?
     var meInfo: NSDictionary?
+    var verifyButtonStatusArray: NSMutableArray?
     
     override func viewDidLoad() {
         self.title = "朋友信息"
@@ -33,6 +34,7 @@ class FriendController: UITableViewController {
         super.init(style: UITableViewStyle.Grouped)
         self.friendArray = [NSMutableDictionary(),NSMutableDictionary()]
         self.verifyFriendArray = []
+        self.verifyButtonStatusArray = []
         
     }
 
@@ -51,6 +53,9 @@ class FriendController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        print(indexPath)
+        
         let cell = UITableViewCell()
         
         let userPhoneTextField = UITextField()
@@ -130,6 +135,19 @@ class FriendController: UITableViewController {
             make.height.equalTo(1)
         }
 
+        
+        
+        
+        
+        let verifyButtonStatus = VerifyButtonStatus()
+        verifyButtonStatus.sendButton = verifyCodeButton
+        
+        self.verifyButtonStatusArray?.addObject(verifyButtonStatus)
+
+        
+        
+        
+        
         
         
         
@@ -221,7 +239,7 @@ class FriendController: UITableViewController {
             
 
             
-            if self.verifyFriendArray?.count == self.friendArray?.count && self.verifyFriendArray?.contains("failure") == nil {
+            if self.verifyFriendArray?.count == self.friendArray?.count && !(self.verifyFriendArray?.contains("failure"))! {
                 
                 let parameters = [
                     "friendArrayMap": self.friendArray as! AnyObject,
@@ -275,8 +293,10 @@ class FriendController: UITableViewController {
         
         
         let phoneText = self.friendArray![sender.tag]["phone_text"] as! String
+        let verifyButtonStatus = self.verifyButtonStatusArray![sender.tag] as! VerifyButtonStatus
         SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: phoneText, zone: "86", customIdentifier: nil) { (error) -> Void in
             if ((error == nil)) {
+                verifyButtonStatus.isCounting = true
                 NSLog("获取验证码成功");
             } else {
                 NSLog("错误信息：%@",error);

@@ -18,6 +18,41 @@ class LoginController: UIViewController {
     var verifyCodeTextField: UITextField?
     var logoImageView: UIImageView?
     
+    var sendButton: SwiftyButton!
+    
+    var countdownTimer: NSTimer?
+    
+    var remainingSeconds: Int = 0 {
+        willSet {
+            sendButton.setTitle("\(newValue)", forState: .Normal)
+            
+            if newValue <= 0 {
+                sendButton.setTitle("重新获取", forState: .Normal)
+                isCounting = false
+            }
+        }
+    }
+    
+    var isCounting = false {
+        willSet {
+            if newValue {
+                countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTime:", userInfo: nil, repeats: true)
+                
+                remainingSeconds = 100
+                
+                sendButton.buttonColor  = UIColor.grayColor()
+            } else {
+                countdownTimer?.invalidate()
+                countdownTimer = nil
+                
+                sendButton.buttonColor  = UIColor.redColor()
+            }
+            
+            sendButton.enabled = !newValue
+        }
+    }
+
+    
     override func viewDidLoad() {
         
         self.navigationController?.navigationBarHidden = true
@@ -63,6 +98,7 @@ class LoginController: UIViewController {
         verifyCodeButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         verifyCodeButton.addTarget(self, action: "getVerifyCode:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(verifyCodeButton)
+        self.sendButton = verifyCodeButton
         
         
         let loginButton = SwiftyButton()
@@ -171,9 +207,16 @@ class LoginController: UIViewController {
     
     func getVerifyCode(sender:UIButton) {
         SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: self.userPhoneTextField!.text, zone: "86", customIdentifier: nil) { (error) -> Void in
+            
+            
             if ((error == nil)) {
+                self.isCounting = true
                 NSLog("获取验证码成功");
             } else {
+                let alertController = UIAlertController(title: "提示", message: error.description, preferredStyle: UIAlertControllerStyle.Alert)
+                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
                 NSLog("错误信息：%@",error);
             }
         }
@@ -230,6 +273,15 @@ class LoginController: UIViewController {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.userPhoneTextField?.resignFirstResponder()
+        self.verifyCodeTextField?.resignFirstResponder()
+    }
+    
+    
+    func sendButtonClick(sender: UIButton) {
+    }
+    
+    func updateTime(timer: NSTimer) {
+        remainingSeconds -= 1
     }
 
     

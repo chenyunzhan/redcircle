@@ -16,6 +16,12 @@ class BookController: UITableViewController {
     
     var tableData: [JSON] = []
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        // Custom initialization
+    }
+
+    
     override init(style: UITableViewStyle) {
         super.init(style: UITableViewStyle.Grouped)
     }
@@ -72,7 +78,14 @@ class BookController: UITableViewController {
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let friends = self.tableData[section]
         let friend = friends["friend"]
-        return friend["friendPhone"].string
+        
+        
+        let name = friend["name"].string
+        if name != "" {
+            return friend["name"].string!+"的朋友圈"
+        } else {
+            return friend["friendPhone"].string!+"的朋友圈"
+        }
     }
     
     

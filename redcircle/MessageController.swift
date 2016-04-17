@@ -30,9 +30,17 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
             RCConversationType.ConversationType_GROUP.rawValue])
         
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"doReceiveMessage:",
+                                                         name: "RECIEVE_NEW_MESSAGE", object: nil)
+        
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
-        let mePhone = userDic!["mePhone"]
-        Alamofire.request(.GET, AppDelegate.baseURLString + "/getRongCloudToken", parameters: ["mePhone": mePhone!!]).responseJSON { (response) -> Void in
+        let mePhone = userDic!["mePhone"] as! NSString
+        var name = userDic!["name"] as! NSString
+        if (name == "") {
+            name = mePhone
+        }
+        Alamofire.request(.GET, AppDelegate.baseURLString + "/getRongCloudToken", parameters: ["mePhone": mePhone, "name": name]).responseJSON { (response) -> Void in
             print(response.request)
             print(response.result.value)
             
@@ -66,14 +74,21 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.notifyUpdateUnreadMessageCount()
+    }
+    
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, atIndexPath indexPath: NSIndexPath!) {
         //打开会话界面
         let chat = RCConversationViewController(conversationType: model.conversationType, targetId: model.targetId)
-        chat.title = model.conversationTitle
+        chat.title = model.conversationTitle;
         chat.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chat, animated: true)
+        self.notifyUpdateUnreadMessageCount()
+        
     }
     
     
@@ -82,12 +97,50 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
             "mePhone": userId,
             ]
         Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
+            print(response.result.value)
             if response.result.isSuccess {
                 let userDic = response.result.value as? NSDictionary
-                completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as! String, portrait: userDic![""]?.string))
+                if (userDic!["name"] as! String == "") {
+                    completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))
+                } else {
+                    completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as? String, portrait: userDic![""]?.string))
+                }
+            } else {
+                completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))
             }
         }
 
         
     }
+    
+
+    
+    func doReceiveMessage(title: NSNotification) {
+        
+
+    }
+    
+    
+    override func notifyUpdateUnreadMessageCount() {
+        self.updateBadgeValueForTabBarItem()
+    }
+    
+    func updateBadgeValueForTabBarItem() {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            //需要长时间处理的代码
+            dispatch_async(dispatch_get_main_queue(), {
+                //需要主线程执行的代码
+                let count = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
+                if (count > 0) {
+                    self.navigationController?.tabBarItem.badgeValue = String(count)
+                    UIApplication.sharedApplication().applicationIconBadgeNumber = Int(count)
+                } else {
+                    self.navigationController?.tabBarItem.badgeValue = nil
+                    UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+
+                }
+            })
+        })
+    }
+    
 }
