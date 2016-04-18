@@ -30,17 +30,6 @@ class MeController: UITableViewController {
     
     override func viewDidLoad() {
         
-        let homeController = ((UIApplication.sharedApplication().delegate) as! AppDelegate).window?.rootViewController as? HomeController
-        let messageNavController = homeController?.viewControllers![0] as? UINavigationController
-        //        homeController?.tabBar.items?.first?.badgeValue = nil
-        //        homeController?.tabBar.items?.first?.badgeValue = "1111"
-        
-        print("======================================================")
-        
-        
-        messageNavController!.tabBarItem.badgeValue = "223"
-        messageNavController!.tabBarItem.title = "消息"
-        
         self.title = "我的"
         
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")

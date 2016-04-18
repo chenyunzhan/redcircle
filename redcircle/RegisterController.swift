@@ -153,9 +153,9 @@ class RegisterController: UIViewController {
     
     func gotoFriendController() {
         
-        let friendController = FriendController(style: UITableViewStyle.Grouped)
-        friendController.meInfo = NSDictionary(dictionary: ["me_phone":(self.userPhoneTextField?.text)!])
-        self.navigationController?.pushViewController(friendController, animated: true)
+//        let friendController = FriendController(style: UITableViewStyle.Grouped)
+//        friendController.meInfo = NSDictionary(dictionary: ["me_phone":(self.userPhoneTextField?.text)!])
+//        self.navigationController?.pushViewController(friendController, animated: true)
         
         
         SMSSDK.commitVerificationCode(self.verifyCodeTextField?.text, phoneNumber: self.userPhoneTextField?.text, zone: "86") { (error) -> Void in
