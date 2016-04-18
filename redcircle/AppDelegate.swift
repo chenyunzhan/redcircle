@@ -57,6 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMReceiveMessageDelegat
         RCIM.sharedRCIM().receiveMessageDelegate = self
         
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveMessageNotification:", name: RCKitDispatchMessageNotification, object: nil)
+        
+        
 //        RCIM.sharedRCIM().connectWithToken("Keyqf3d5gbj3ufqh",
 //            success: { (userId) -> Void in
 //                print("登陆成功。当前登录的用户ID：\(userId)")
@@ -104,32 +107,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMReceiveMessageDelegat
     //监听消息接收
     func onRCIMReceiveMessage(message: RCMessage!, left: Int32) {
         
-        let count = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
-        UIApplication.sharedApplication().applicationIconBadgeNumber = Int(count)
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("RECIEVE_NEW_MESSAGE", object: "111111")
-        
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            //需要长时间处理的代码
-            dispatch_async(dispatch_get_main_queue(), {
-                //需要主线程执行的代码
-                let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
-
-                if (userDic != nil) {
-                    let homeController = self.window?.rootViewController as! UITabBarController
-                    let messageNavController = homeController.viewControllers![0] as! UINavigationController
-                    messageNavController.tabBarItem.badgeValue = String(count)
-                }
-
-            })
-        })
-        print(count)
+//        let count = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
+//        UIApplication.sharedApplication().applicationIconBadgeNumber = Int(count)
+//        
+//        NSNotificationCenter.defaultCenter().postNotificationName("RECIEVE_NEW_MESSAGE", object: "111111")
+//        
+//        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//            //需要长时间处理的代码
+//            dispatch_async(dispatch_get_main_queue(), {
+//                //需要主线程执行的代码
+//                let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
+//
+//                if (userDic != nil) {
+//                    let homeController = self.window?.rootViewController as! UITabBarController
+//                    let messageNavController = homeController.viewControllers![0] as! UINavigationController
+//                    messageNavController.tabBarItem.badgeValue = String(count)
+//                }
+//
+//            })
+//        })
+//        print(count)
         
         if (left != 0) {
             print("收到一条消息，当前的接收队列中还剩余\(left)条消息未接收，您可以等待left为0时再刷新UI以提高性能")
         } else {
             print("收到一条消息")
+        }
+    }
+    
+    func didReceiveMessageNotification(notification: NSNotification) {
+        let message = notification.object
+        if (message?.messageDirection == .MessageDirection_RECEIVE) {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         }
     }
     

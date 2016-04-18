@@ -34,7 +34,7 @@ class FriendController: UITableViewController {
         super.init(style: UITableViewStyle.Grouped)
         self.friendArray = [NSMutableDictionary(),NSMutableDictionary()]
         self.verifyFriendArray = []
-        self.verifyButtonStatusArray = []
+        self.verifyButtonStatusArray = [VerifyButtonStatus(),VerifyButtonStatus()]
         
     }
 
@@ -70,11 +70,9 @@ class FriendController: UITableViewController {
         
         let verifyCodeButton = SwiftyButton()
         verifyCodeButton.tag = indexPath.section
-        verifyCodeButton.buttonColor = UIColor.redColor()
         verifyCodeButton.highlightedColor = UIColor.orangeColor()
         verifyCodeButton.shadowHeight     = 0
         verifyCodeButton.cornerRadius     = 5
-        verifyCodeButton.setTitle("获取验证码", forState: UIControlState.Normal)
         verifyCodeButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         verifyCodeButton.addTarget(self, action: "getVerifyCode:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.contentView.addSubview(verifyCodeButton)
@@ -93,6 +91,15 @@ class FriendController: UITableViewController {
         let friendDic = self.friendArray?[indexPath.section] as! NSMutableDictionary
         userPhoneTextField.text = friendDic["phone_text"] as? String
         verifyCodeTextField.text = friendDic["verify_code_text"] as? String
+        
+        let verifyButtonStatus = self.verifyButtonStatusArray?[indexPath.section] as! VerifyButtonStatus
+        verifyButtonStatus.sendButton = verifyCodeButton
+        if (verifyButtonStatus.isCounting) {
+            verifyCodeButton.buttonColor  = UIColor.grayColor()
+        } else {
+            verifyCodeButton.buttonColor = UIColor.redColor()
+            verifyCodeButton.setTitle("获取验证码", forState: UIControlState.Normal)
+        }
 
         
         
@@ -134,20 +141,6 @@ class FriendController: UITableViewController {
             make.left.equalTo(verifyCodeTextField)
             make.height.equalTo(1)
         }
-
-        
-        
-        
-        
-        let verifyButtonStatus = VerifyButtonStatus()
-        verifyButtonStatus.sendButton = verifyCodeButton
-        
-        self.verifyButtonStatusArray?.addObject(verifyButtonStatus)
-
-        
-        
-        
-        
         
         
         
@@ -166,17 +159,20 @@ class FriendController: UITableViewController {
             let indexPath = NSIndexPath(forRow: 0, inSection: index)
 
             let cell = self.tableView.cellForRowAtIndexPath(indexPath)
-            let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
-            let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
-            let friendDic = self.friendArray![index]
-            friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
-            friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+            if (cell != nil) {
+                let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
+                let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
+                let friendDic = self.friendArray![index]
+                friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
+                friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+            }
         }
         
         
         
         
         self.friendArray?.addObject(NSMutableDictionary())
+        self.verifyButtonStatusArray?.addObject(VerifyButtonStatus())
         self.tableView.reloadData()
     }
     
@@ -190,11 +186,14 @@ class FriendController: UITableViewController {
             let indexPath = NSIndexPath(forRow: 0, inSection: index)
             
             let cell = self.tableView.cellForRowAtIndexPath(indexPath)
-            let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
-            let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
-            let friendDic = self.friendArray![index]
-            friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
-            friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+            if (cell != nil) {
+                let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
+                let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
+                let friendDic = self.friendArray![index]
+                friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
+                friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+            }
+
         }
         
         
@@ -228,7 +227,9 @@ class FriendController: UITableViewController {
                         }
                     }
                     
-                    NSThread.sleepForTimeInterval(10)
+                    while (self.verifyFriendArray?.count != self.friendArray?.count) {
+                        NSThread.sleepForTimeInterval(3)
+                    }
 
                 })
             }
@@ -284,11 +285,13 @@ class FriendController: UITableViewController {
             let indexPath = NSIndexPath(forRow: 0, inSection: index)
             
             let cell = self.tableView.cellForRowAtIndexPath(indexPath)
-            let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
-            let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
-            let friendDic = self.friendArray![index]
-            friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
-            friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+            if (cell != nil) {
+                let userPhoneTextField = cell?.contentView.subviews[0] as? UITextField
+                let verifyCodeTextField = cell?.contentView.subviews[1] as? UITextField
+                let friendDic = self.friendArray![index]
+                friendDic.setObject(userPhoneTextField?.text, forKey: "phone_text")
+                friendDic.setObject(verifyCodeTextField?.text, forKey: "verify_code_text")
+            }
         }
         
         
