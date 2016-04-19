@@ -53,7 +53,14 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
                     if(code == "200") {
                         let token = response.result.value?.valueForKey("result")?.valueForKey("token") as! String
                         NSUserDefaults.standardUserDefaults().setObject(token, forKey: "RC_TOKEN")
-                        self.viewDidLoad()
+                        RCIM.sharedRCIM().connectWithToken(token, success: { (userId) in
+                            print("登陆成功。当前登录的用户ID：\(userId)")
+
+                            }, error: { (status) in
+                                
+                            }, tokenIncorrect: { 
+                                
+                        })
                     }
 
                 } else {
@@ -76,16 +83,15 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
                                             self.refreshConversationTableViewIfNeeded()
             }, error: { (status) -> Void in
                 
-                let alertController = UIAlertController(title: "提示", message: "登陆的错误码为:\(status.rawValue)", preferredStyle: UIAlertControllerStyle.Alert)
-                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                self.presentViewController(alertController, animated: true, completion: nil)
+//                let alertController = UIAlertController(title: "提示", message: "登陆的错误码为:\(status.rawValue)", preferredStyle: UIAlertControllerStyle.Alert)
+//                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+//                alertController.addAction(cancelAction)
+//                self.presentViewController(alertController, animated: true, completion: nil)
                 
                 NSUserDefaults.standardUserDefaults().removeObjectForKey("RC_TOKEN")
                 
                 print("登陆的错误码为:\(status.rawValue)")
             }, tokenIncorrect: {
-                
                 
                 let alertController = UIAlertController(title: "提示", message: "Token已过期，请重新登录", preferredStyle: UIAlertControllerStyle.Alert)
                 let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
