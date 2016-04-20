@@ -1,4 +1,4 @@
-pod 'SlideMenuControllerSwift'
+#pod 'SlideMenuControllerSwift'
 
 use_frameworks!
 
@@ -28,10 +28,10 @@ use_frameworks!
 
 pod 'SnapKit', '~> 0.15.0'
 
-pod 'MGSwipeTableCell'
+#pod 'MGSwipeTableCell'
 
 
-pod 'SwiftyButton/CustomContent'
+pod 'SwiftyButton'
 
 
 pod 'MOBFoundation_IDFA'

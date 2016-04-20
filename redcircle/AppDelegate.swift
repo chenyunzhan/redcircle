@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMReceiveMessageDelegat
         
         SMSSDK.registerApp("111412781a7c4", withSecret: "81008993f3de84d463ccd91cf4bb7509")
         
-        RCIM.sharedRCIM().initWithAppKey("qf3d5gbj3ufqh")
+        RCIM.sharedRCIM().initWithAppKey("sfci50a7c2fsi")
         
         //设置消息接收的监听
         RCIM.sharedRCIM().receiveMessageDelegate = self

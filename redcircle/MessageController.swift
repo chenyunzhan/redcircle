@@ -57,9 +57,18 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
                             print("登陆成功。当前登录的用户ID：\(userId)")
 
                             }, error: { (status) in
-                                
+                                let alertController = UIAlertController(title: "提示", message: "登陆的错误码为:\(status.rawValue)", preferredStyle: UIAlertControllerStyle.Alert)
+                                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                                alertController.addAction(cancelAction)
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                                NSUserDefaults.standardUserDefaults().removeObjectForKey("RC_TOKEN")
                             }, tokenIncorrect: { 
+                                let alertController = UIAlertController(title: "提示", message: "Token已过期，请重新登录", preferredStyle: UIAlertControllerStyle.Alert)
+                                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                                alertController.addAction(cancelAction)
+                                self.presentViewController(alertController, animated: true, completion: nil)
                                 
+                                NSUserDefaults.standardUserDefaults().removeObjectForKey("RC_TOKEN")
                         })
                     }
 
