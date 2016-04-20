@@ -29,10 +29,7 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         //设置需要将哪些类型的会话在会话列表中聚合显示
         self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
             RCConversationType.ConversationType_GROUP.rawValue])
-        
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"doReceiveMessage:",
-                                                         name: "RECIEVE_NEW_MESSAGE", object: nil)
+
         
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
         let mePhone = userDic!["mePhone"] as! NSString
@@ -40,38 +37,74 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         if (name == "") {
             name = mePhone
         }
-        Alamofire.request(.GET, AppDelegate.baseURLString + "/getRongCloudToken", parameters: ["mePhone": mePhone, "name": name]).responseJSON { (response) -> Void in
-            print(response.request)
-            print(response.result.value)
-            
-            
-            
-            if (response.result.isSuccess) {
-                let code = response.result.value?.valueForKey("code") as! String
-                if(code == "200") {
-                    
-                    let token = response.result.value?.valueForKey("result")?.valueForKey("token") as! String
-                    
-                    RCIM.sharedRCIM().connectWithToken(token,
-                        success: { (userId) -> Void in
-                            print("登陆成功。当前登录的用户ID：\(userId)")
-                        }, error: { (status) -> Void in
-                            print("登陆的错误码为:\(status.rawValue)")
-                        }, tokenIncorrect: {
-                            //token过期或者不正确。
-                            //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
-                            //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-                            print("token错误")
-                    })
-                }
+        
+        let token = NSUserDefaults.standardUserDefaults().objectForKey("RC_TOKEN") as? String
 
-            } else {
-                let alertController = UIAlertController(title: "提示", message: response.result.error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+        if (token == nil) {
+            
+            Alamofire.request(.GET, AppDelegate.baseURLString + "/getRongCloudToken", parameters: ["mePhone": mePhone, "name": name]).responseJSON { (response) -> Void in
+                print(response.request)
+                print(response.result.value)
+                
+                
+                
+                if (response.result.isSuccess) {
+                    let code = response.result.value?.valueForKey("code") as! String
+                    if(code == "200") {
+                        let token = response.result.value?.valueForKey("result")?.valueForKey("token") as! String
+                        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "RC_TOKEN")
+                        RCIM.sharedRCIM().connectWithToken(token, success: { (userId) in
+                            print("登陆成功。当前登录的用户ID：\(userId)")
+
+                            }, error: { (status) in
+                                
+                            }, tokenIncorrect: { 
+                                
+                        })
+                    }
+
+                } else {
+                    let alertController = UIAlertController(title: "提示", message: response.result.error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                    let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                    alertController.addAction(cancelAction)
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+            }
+            
+        }
+        
+        
+
+        
+        
+        RCIM.sharedRCIM().connectWithToken(token,
+                                           success: { (userId) -> Void in
+                                            print("登陆成功。当前登录的用户ID：\(userId)")
+                                            self.refreshConversationTableViewIfNeeded()
+            }, error: { (status) -> Void in
+                
+//                let alertController = UIAlertController(title: "提示", message: "登陆的错误码为:\(status.rawValue)", preferredStyle: UIAlertControllerStyle.Alert)
+//                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+//                alertController.addAction(cancelAction)
+//                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                NSUserDefaults.standardUserDefaults().removeObjectForKey("RC_TOKEN")
+                
+                print("登陆的错误码为:\(status.rawValue)")
+            }, tokenIncorrect: {
+                
+                let alertController = UIAlertController(title: "提示", message: "Token已过期，请重新登录", preferredStyle: UIAlertControllerStyle.Alert)
                 let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
                 alertController.addAction(cancelAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
-            }
-        }
+                
+                NSUserDefaults.standardUserDefaults().removeObjectForKey("RC_TOKEN")
+
+                //token过期或者不正确。
+                //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
+                //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
+                print("token错误")
+        })
     }
     
     override func viewWillAppear(animated: Bool) {

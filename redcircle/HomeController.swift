@@ -27,18 +27,11 @@ class HomeController: UITabBarController {
         let meNavController = UINavigationController(rootViewController: meController)
         let bookNavController = UINavigationController(rootViewController: bookController)
         
-//        messageNavController.tabBarItem.title = "dfsfsd"
-        messageNavController.tabBarItem.badgeValue = "23"
-        messageNavController.tabBarItem.title = "消息"
-        messageNavController.tabBarItem.image = UIImage.fontAwesomeIconWithName(.Comment, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-        
-        
-        print("======================================================")
-        print(messageNavController)
+
         
         
         
-//        messageController.tabBarItem = UITabBarItem(title: "消息", image: UIImage.fontAwesomeIconWithName(.Comment, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), tag: 100)
+        messageController.tabBarItem = UITabBarItem(title: "消息", image: UIImage.fontAwesomeIconWithName(.Comment, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), tag: 100)
         bookController.tabBarItem = UITabBarItem(title: "朋友", image: UIImage.fontAwesomeIconWithName(.Users, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), tag: 101)
         meController.tabBarItem = UITabBarItem(title: "我的", image: UIImage.fontAwesomeIconWithName(.User, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), tag: 102)
         

@@ -18,6 +18,11 @@ class FriendController: UITableViewController {
     var meInfo: NSDictionary?
     var verifyButtonStatusArray: NSMutableArray?
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        // Custom initialization
+    }
+    
     override func viewDidLoad() {
         self.title = "朋友信息"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成注册", style: UIBarButtonItemStyle.Done, target: self, action: "doResigterAction")
