@@ -77,6 +77,7 @@
 		617618FC1CB8CC340022C394 /* readme.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = readme.strings; sourceTree = "<group>"; };
 		617F96891CB544C00032BF1C /* redcircle_t_red_user.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = redcircle_t_red_user.sql; sourceTree = "<group>"; };
 		61E9A0371CC3B69A00C3D7E0 /* VerifyButtonStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyButtonStatus.swift; sourceTree = "<group>"; };
+		7F0F1A871CC70A7200052714 /* 红圈生产推送证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈生产推送证书.p12"; sourceTree = "<group>"; };
 		7F16CF0D1CB632EB004A74F5 /* CellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		7F16CF0F1CB6464B004A74F5 /* ModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyController.swift; sourceTree = "<group>"; };
 		7F738B0C1CBE372900C15C70 /* 红圈生产证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈生产证书.p12"; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 		617F96881CB544C00032BF1C /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				7F0F1A871CC70A7200052714 /* 红圈生产推送证书.p12 */,
 				610069E01CC238780035E2F0 /* 红圈开发推送证书.p12 */,
 				7F738B0C1CBE372900C15C70 /* 红圈生产证书.p12 */,
 				617618FB1CB8CBBC0022C394 /* 红圈开发证书.p12 */,
