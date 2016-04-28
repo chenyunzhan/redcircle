@@ -16,8 +16,21 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         self.title = "消息"
         RCIM.sharedRCIM().userInfoDataSource = self
         
+        
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
+        
+        
+        let emptyLabel = UILabel(frame: CGRectMake(100,100,50,50))
+        emptyLabel.text = "请在朋友页面发起会话"
+        emptyLabel.textColor = UIColor.lightGrayColor()
+        self.emptyConversationView = emptyLabel
+        
+        
+        emptyLabel.snp_makeConstraints { (make) -> Void in
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view).offset(-64)
+        }
         
         //设置需要显示哪些类型的会话
         self.setDisplayConversationTypes([RCConversationType.ConversationType_PRIVATE.rawValue,
