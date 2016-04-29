@@ -52,7 +52,7 @@ class ReportController: UITableViewController {
         self.tableData = tableData
         
         
-        let rightImage = UIImage.fontAwesomeIconWithName(.PaperPlaneO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+        let rightImage = UIImage.fontAwesomeIconWithName(.PaperPlaneO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25))
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightImage, style: .Done, target: self, action: #selector(ReportController.doSubmitReport))
 
