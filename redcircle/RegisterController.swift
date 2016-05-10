@@ -86,6 +86,20 @@ class RegisterController: UIViewController {
         self.sendButton = verifyCodeButton
         
         
+        let agreementButton = UIButton();
+        agreementButton.setTitle("使用条款和隐私政策", forState: .Normal)
+        agreementButton.titleLabel?.font = UIFont.systemFontOfSize(13)
+        agreementButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+        agreementButton.addTarget(self, action: #selector(RegisterController.readAgreementAction), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(agreementButton)
+        
+        let agreementButton1 = UIButton();
+        agreementButton1.setTitle("注册代表同意", forState: .Normal)
+        agreementButton1.titleLabel!.font = UIFont.systemFontOfSize(13)
+        agreementButton1.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.view.addSubview(agreementButton1)
+        
+        
         let userPhoneLineView = UIView()
         userPhoneLineView.backgroundColor = UIColor.redColor()
         self.view .addSubview(userPhoneLineView)
@@ -132,6 +146,21 @@ class RegisterController: UIViewController {
             make.left.equalTo(verifyCodeTextField)
             make.height.equalTo(1)
         }
+        
+        
+        agreementButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self.view).offset(45)
+            make.top.equalTo(verifyCodeButton.snp_bottom).offset(20)
+            make.height.equalTo(30)
+            make.width.equalTo(120)
+        }
+        
+        agreementButton1.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self.view).offset(-53)
+            make.top.equalTo(verifyCodeButton.snp_bottom).offset(20)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+        }
     }
     
     
@@ -148,6 +177,12 @@ class RegisterController: UIViewController {
                 NSLog("错误信息：%@",error);
             }
         }
+    }
+    
+    func readAgreementAction() {
+        let agreementController = WebViewController()
+        let agreementControllerNav = UINavigationController(rootViewController: agreementController)
+        self.presentViewController(agreementControllerNav, animated: true, completion: nil)
     }
     
     

@@ -30,6 +30,7 @@
 		610069DD1CC1F2510035E2F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069DC1CC1F2510035E2F0 /* SystemConfiguration.framework */; };
 		610069DF1CC1F2590035E2F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069DE1CC1F2590035E2F0 /* UIKit.framework */; };
 		613FE8B81CB54ED90029CD8C /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613FE8B71CB54ED90029CD8C /* ChatController.swift */; };
+		6143D4B01CE21C4A00481753 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6143D4AF1CE21C4A00481753 /* WebViewController.swift */; };
 		61E9A0381CC3B69A00C3D7E0 /* VerifyButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E9A0371CC3B69A00C3D7E0 /* VerifyButtonStatus.swift */; };
 		61FD9C681CD0FAD000775772 /* ReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD9C671CD0FAD000775772 /* ReportController.swift */; };
 		7F16CF0E1CB632EB004A74F5 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16CF0D1CB632EB004A74F5 /* CellModel.swift */; };
@@ -74,6 +75,7 @@
 		610069DE1CC1F2590035E2F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		610069E01CC238780035E2F0 /* 红圈开发推送证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈开发推送证书.p12"; sourceTree = "<group>"; };
 		613FE8B71CB54ED90029CD8C /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		6143D4AF1CE21C4A00481753 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		617618FB1CB8CBBC0022C394 /* 红圈开发证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈开发证书.p12"; sourceTree = "<group>"; };
 		617618FC1CB8CC340022C394 /* readme.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = readme.strings; sourceTree = "<group>"; };
 		617F96891CB544C00032BF1C /* redcircle_t_red_user.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = redcircle_t_red_user.sql; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				613FE8B71CB54ED90029CD8C /* ChatController.swift */,
 				7F16CF0F1CB6464B004A74F5 /* ModifyController.swift */,
 				61FD9C671CD0FAD000775772 /* ReportController.swift */,
+				6143D4AF1CE21C4A00481753 /* WebViewController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				61E9A0381CC3B69A00C3D7E0 /* VerifyButtonStatus.swift in Sources */,
 				7FD692911CAA7F4700D17E7B /* MessageController.swift in Sources */,
 				61FD9C681CD0FAD000775772 /* ReportController.swift in Sources */,
+				6143D4B01CE21C4A00481753 /* WebViewController.swift in Sources */,
 				7F16CF101CB6464B004A74F5 /* ModifyController.swift in Sources */,
 				613FE8B81CB54ED90029CD8C /* ChatController.swift in Sources */,
 			);

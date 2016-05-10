@@ -121,6 +121,21 @@ class LoginController: UIViewController {
         verifyCodeLineView.backgroundColor = UIColor.redColor()
         self.view.addSubview(verifyCodeLineView)
         
+        
+        
+        let agreementButton = UIButton();
+        agreementButton.setTitle("使用条款和隐私政策", forState: .Normal)
+        agreementButton.titleLabel?.font = UIFont.systemFontOfSize(13)
+        agreementButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+        agreementButton.addTarget(self, action: #selector(LoginController.readAgreementAction), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(agreementButton)
+        
+        let agreementButton1 = UIButton();
+        agreementButton1.setTitle("注册代表同意", forState: .Normal)
+        agreementButton1.titleLabel!.font = UIFont.systemFontOfSize(13)
+        agreementButton1.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.view.addSubview(agreementButton1)
+        
         userPhoneTextField.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(logoImageView.snp_bottom).offset(20)
             make.right.equalTo(self.view).offset(-20)
@@ -190,6 +205,21 @@ class LoginController: UIViewController {
         }
         
         
+        agreementButton.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self.view).offset(45)
+            make.top.equalTo(registerButton.snp_bottom).offset(30)
+            make.height.equalTo(30)
+            make.width.equalTo(120)
+        }
+        
+        agreementButton1.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self.view).offset(-53)
+            make.top.equalTo(registerButton.snp_bottom).offset(30)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+        }
+        
+        
         registerButton.addTarget(self, action: "gotoRegisterController", forControlEvents: UIControlEvents.TouchUpInside)
         
         
@@ -236,6 +266,12 @@ class LoginController: UIViewController {
                 }
             }
         }
+    }
+    
+    func readAgreementAction() {
+        let agreementController = WebViewController()
+        let agreementControllerNav = UINavigationController(rootViewController: agreementController)
+        self.presentViewController(agreementControllerNav, animated: true, completion: nil)
     }
     
     func registerForKeyboardNotifications() {
