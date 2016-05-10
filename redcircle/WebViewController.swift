@@ -20,7 +20,7 @@ class WebViewController: UIViewController {
         
         
         let webView = UIWebView(frame: self.view.frame)
-        webView.loadRequest(NSURLRequest(URL: (NSURL(string: baseURLString + "/agreement.html"))!))
+        webView.loadRequest(NSURLRequest(URL: (NSURL(string: AppDelegate.baseURLString + "/agreement.html"))!))
         
         
         self.view.addSubview(webView)
