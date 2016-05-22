@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A04CDBDC4FE61F0382A0269 /* Pods_redcircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B37679080477E3C1C6AA488 /* Pods_redcircle.framework */; };
 		610069B51CC1F19C0035E2F0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069B41CC1F19C0035E2F0 /* AssetsLibrary.framework */; };
 		610069B71CC1F1AD0035E2F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069B61CC1F1AD0035E2F0 /* AudioToolbox.framework */; };
 		610069B91CC1F1B40035E2F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069B81CC1F1B40035E2F0 /* AVFoundation.framework */; };
@@ -31,6 +32,7 @@
 		610069DF1CC1F2590035E2F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069DE1CC1F2590035E2F0 /* UIKit.framework */; };
 		613FE8B81CB54ED90029CD8C /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613FE8B71CB54ED90029CD8C /* ChatController.swift */; };
 		6143D4B01CE21C4A00481753 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6143D4AF1CE21C4A00481753 /* WebViewController.swift */; };
+		614446421CF19FD700854804 /* AddFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614446411CF19FD700854804 /* AddFriendController.swift */; };
 		61E9A0381CC3B69A00C3D7E0 /* VerifyButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E9A0371CC3B69A00C3D7E0 /* VerifyButtonStatus.swift */; };
 		61FD9C681CD0FAD000775772 /* ReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD9C671CD0FAD000775772 /* ReportController.swift */; };
 		7F16CF0E1CB632EB004A74F5 /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F16CF0D1CB632EB004A74F5 /* CellModel.swift */; };
@@ -46,11 +48,9 @@
 		7FD692911CAA7F4700D17E7B /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD692901CAA7F4700D17E7B /* MessageController.swift */; };
 		7FFB63741CAB5C5F008C7AAD /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB63731CAB5C5F008C7AAD /* RegisterController.swift */; };
 		7FFB637A1CAB9BB5008C7AAD /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB63791CAB9BB5008C7AAD /* FriendController.swift */; };
-		DC32D60A929B9D69855BD29A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2580625D062EFBEF81E64C /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B779DF423F331656B3F4406 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		610069B41CC1F19C0035E2F0 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		610069B61CC1F1AD0035E2F0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		610069B81CC1F1B40035E2F0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -76,6 +76,7 @@
 		610069E01CC238780035E2F0 /* 红圈开发推送证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈开发推送证书.p12"; sourceTree = "<group>"; };
 		613FE8B71CB54ED90029CD8C /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		6143D4AF1CE21C4A00481753 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		614446411CF19FD700854804 /* AddFriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendController.swift; sourceTree = "<group>"; };
 		617618FB1CB8CBBC0022C394 /* 红圈开发证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈开发证书.p12"; sourceTree = "<group>"; };
 		617618FC1CB8CC340022C394 /* readme.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = readme.strings; sourceTree = "<group>"; };
 		617F96891CB544C00032BF1C /* redcircle_t_red_user.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = redcircle_t_red_user.sql; sourceTree = "<group>"; };
@@ -99,8 +100,9 @@
 		7FFB63731CAB5C5F008C7AAD /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		7FFB63751CAB78E5008C7AAD /* redcircle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "redcircle-Bridging-Header.h"; sourceTree = "<group>"; };
 		7FFB63791CAB9BB5008C7AAD /* FriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
-		86D4A747F9A9095502B518A9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		8B2580625D062EFBEF81E64C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		860B370FCE230DCE6557479E /* Pods-redcircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.debug.xcconfig"; sourceTree = "<group>"; };
+		8B37679080477E3C1C6AA488 /* Pods_redcircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_redcircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9D85ED62815718989DB6351 /* Pods-redcircle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.release.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +132,7 @@
 				610069B91CC1F1B40035E2F0 /* AVFoundation.framework in Frameworks */,
 				610069B71CC1F1AD0035E2F0 /* AudioToolbox.framework in Frameworks */,
 				610069B51CC1F19C0035E2F0 /* AssetsLibrary.framework in Frameworks */,
-				DC32D60A929B9D69855BD29A /* Pods.framework in Frameworks */,
+				4A04CDBDC4FE61F0382A0269 /* Pods_redcircle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,8 +142,8 @@
 		3B9C8589B9A7FC51BC7793DE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				86D4A747F9A9095502B518A9 /* Pods.debug.xcconfig */,
-				2B779DF423F331656B3F4406 /* Pods.release.xcconfig */,
+				860B370FCE230DCE6557479E /* Pods-redcircle.debug.xcconfig */,
+				F9D85ED62815718989DB6351 /* Pods-redcircle.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -208,6 +210,7 @@
 				7F16CF0F1CB6464B004A74F5 /* ModifyController.swift */,
 				61FD9C671CD0FAD000775772 /* ReportController.swift */,
 				6143D4AF1CE21C4A00481753 /* WebViewController.swift */,
+				614446411CF19FD700854804 /* AddFriendController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -237,7 +240,7 @@
 				610069B81CC1F1B40035E2F0 /* AVFoundation.framework */,
 				610069B61CC1F1AD0035E2F0 /* AudioToolbox.framework */,
 				610069B41CC1F19C0035E2F0 /* AssetsLibrary.framework */,
-				8B2580625D062EFBEF81E64C /* Pods.framework */,
+				8B37679080477E3C1C6AA488 /* Pods_redcircle.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -249,12 +252,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FC634D01CAA63A800557D9F /* Build configuration list for PBXNativeTarget "redcircle" */;
 			buildPhases = (
-				380744309AA9BC2D97F8C254 /* Check Pods Manifest.lock */,
+				380744309AA9BC2D97F8C254 /* 📦 Check Pods Manifest.lock */,
 				7FC634BA1CAA63A800557D9F /* Sources */,
 				7FC634BB1CAA63A800557D9F /* Frameworks */,
 				7FC634BC1CAA63A800557D9F /* Resources */,
-				DD469B20B01A4FC317FF4FD5 /* Embed Pods Frameworks */,
-				4CC0C752FEBB28213F4B110C /* Copy Pods Resources */,
+				DD469B20B01A4FC317FF4FD5 /* 📦 Embed Pods Frameworks */,
+				4CC0C752FEBB28213F4B110C /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -313,14 +316,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		380744309AA9BC2D97F8C254 /* Check Pods Manifest.lock */ = {
+		380744309AA9BC2D97F8C254 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,34 +331,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4CC0C752FEBB28213F4B110C /* Copy Pods Resources */ = {
+		4CC0C752FEBB28213F4B110C /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-redcircle/Pods-redcircle-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DD469B20B01A4FC317FF4FD5 /* Embed Pods Frameworks */ = {
+		DD469B20B01A4FC317FF4FD5 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-redcircle/Pods-redcircle-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -366,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FFB63741CAB5C5F008C7AAD /* RegisterController.swift in Sources */,
+				614446421CF19FD700854804 /* AddFriendController.swift in Sources */,
 				7FFB637A1CAB9BB5008C7AAD /* FriendController.swift in Sources */,
 				7FC634C41CAA63A800557D9F /* HomeController.swift in Sources */,
 				7F16CF0E1CB632EB004A74F5 /* CellModel.swift in Sources */,
@@ -489,7 +493,7 @@
 		};
 		7FC634D11CAA63A800557D9F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86D4A747F9A9095502B518A9 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 860B370FCE230DCE6557479E /* Pods-redcircle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -508,7 +512,7 @@
 		};
 		7FC634D21CAA63A800557D9F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B779DF423F331656B3F4406 /* Pods.release.xcconfig */;
+			baseConfigurationReference = F9D85ED62815718989DB6351 /* Pods-redcircle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

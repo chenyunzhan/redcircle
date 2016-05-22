@@ -34,6 +34,9 @@ class BookController: UITableViewController {
         
         
         self.title = "朋友"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加朋友", style: .Done, target: self, action: #selector(addRootFriend));
+        
+        
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
         let mePhone = userDic!["mePhone"]
         Alamofire.request(.GET, AppDelegate.baseURLString + "/getFriends", parameters: ["mePhone": mePhone!!]).responseJSON { (response) -> Void in
@@ -111,6 +114,19 @@ class BookController: UITableViewController {
         //显示聊天会话界面
         chat.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    
+    func addRootFriend() -> Void {
+        let addFriendController = AddFriendController()
+        addFriendController.hidesBottomBarWhenPushed = true
+        addFriendController.initWithClosure(someFunctionThatTakesAClosure)
+        self.navigationController?.pushViewController(addFriendController, animated: true)
+    }
+    
+    
+    func someFunctionThatTakesAClosure(string:String) -> Void {
+        self.viewDidLoad()
     }
     
     
