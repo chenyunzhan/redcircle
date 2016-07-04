@@ -54,6 +54,6 @@ target 'redcircle' do
     pod 'FontAwesome.swift'
     pod 'SnapKit', '~> 0.15.0'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-
+    pod 'SKPhotoBrowser'
 end
 

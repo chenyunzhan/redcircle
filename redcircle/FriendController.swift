@@ -26,18 +26,18 @@ class FriendController: UITableViewController {
     override func viewDidLoad() {
         self.title = "朋友信息"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成注册", style: UIBarButtonItemStyle.Done, target: self, action: "doResigterAction")
-        let footerButton = UIButton()
-        footerButton.setTitle("添加一个朋友", forState: UIControlState.Normal)
-        footerButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        footerButton.frame = CGRectMake(0, 0, 0, 40)
-        footerButton.addTarget(self, action: "addFriendAction", forControlEvents: UIControlEvents.TouchUpInside)
-        self.tableView.tableFooterView = footerButton
+//        let footerButton = UIButton()
+//        footerButton.setTitle("添加一个朋友", forState: UIControlState.Normal)
+//        footerButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+//        footerButton.frame = CGRectMake(0, 0, 0, 40)
+//        footerButton.addTarget(self, action: "addFriendAction", forControlEvents: UIControlEvents.TouchUpInside)
+//        self.tableView.tableFooterView = footerButton
         
     }
     
     override init(style: UITableViewStyle) {
         super.init(style: UITableViewStyle.Grouped)
-        self.friendArray = [NSMutableDictionary(),NSMutableDictionary()]
+        self.friendArray = [NSMutableDictionary()]
         self.verifyFriendArray = []
         self.verifyButtonStatusArray = [VerifyButtonStatus(),VerifyButtonStatus()]
         
@@ -64,7 +64,7 @@ class FriendController: UITableViewController {
         let cell = UITableViewCell()
         
         let userPhoneTextField = UITextField()
-        userPhoneTextField.placeholder = String(format: "请输入您朋友%d的手机号", indexPath.section+1)
+        userPhoneTextField.placeholder = String(format: "请输入您朋友的手机号")
 
         cell.contentView.addSubview(userPhoneTextField)
         

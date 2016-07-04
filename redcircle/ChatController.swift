@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import SKPhotoBrowser
 
-
-class ChatController: RCConversationViewController {
+class ChatController: RCConversationViewController, SKPhotoBrowserDelegate {
     
 //    override func sendMessage(messageContent: RCMessageContent!, pushContent: String!) {
 //        super.sendMessage(messageContent, pushContent: pushContent)
@@ -18,6 +18,8 @@ class ChatController: RCConversationViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+                
         
 //        let rightImage = UIImage.fontAwesomeIconWithName(.PaperPlaneO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
         
@@ -60,6 +62,21 @@ class ChatController: RCConversationViewController {
         super.viewDidAppear(animated)
         
         
+    }
+    
+    
+    override func didTapCellPortrait(userId: String!) {
+        super.didTapCellPortrait(userId)
+        // add SKPhoto Array from UIImage
+        var images = [SKPhoto]()
+        let photo = SKPhoto.photoWithImageURL(AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId + "&type=original")
+        images.append(photo)
+        
+        // create PhotoBrowser Instance, and present.
+        let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(0)
+        browser.delegate = self
+        presentViewController(browser, animated: true, completion: {})
     }
     
     

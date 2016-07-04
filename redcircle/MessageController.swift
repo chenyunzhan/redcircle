@@ -148,17 +148,23 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
     
     
     func getUserInfoWithUserId(userId: String!, completion: ((RCUserInfo!) -> Void)!) {
+        
+        let x = arc4random() % 100;
+        
+        
+        
         let parameters = [
             "mePhone": userId,
+            "random":NSString(format: "%d", x)
             ]
         Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
             print(response.result.value)
             if response.result.isSuccess {
                 let userDic = response.result.value as? NSDictionary
                 if (userDic!["name"] as! String == "") {
-                    completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))
+                    completion?(RCUserInfo.init(userId: userId, name: userId, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId))
                 } else {
-                    completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as? String, portrait: userDic![""]?.string))
+                    completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as? String, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId))
                 }
             } else {
                 completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))

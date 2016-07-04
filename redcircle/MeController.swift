@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 
 class MeController: UITableViewController {
@@ -49,6 +50,24 @@ class MeController: UITableViewController {
         cellModel4.title = "退出登录"
         cellModel4.desc = ""
         
+        let cellModel5 = CellModel()
+        cellModel5.title = "头像"
+        cellModel5.image = AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + (userDic!["mePhone"] as! String)
+        let cellModel6 = CellModel()
+        cellModel6.title = "红圈"
+        cellModel6.desc = ""
+        
+        let cellModel7 = CellModel()
+        cellModel7.title = "朋友圈"
+        cellModel7.desc = ""
+        
+        let cellModel8 = CellModel()
+        cellModel8.title = "相册"
+        cellModel8.desc = ""
+        
+        
+        
+        
         
         
         self.tableData = NSMutableArray()
@@ -62,6 +81,16 @@ class MeController: UITableViewController {
         let sectionArray2 = NSMutableArray()
         sectionArray2.addObject(cellModel4)
         
+        let sectionArray3 = NSMutableArray()
+        sectionArray3.addObject(cellModel5)
+        
+        let sectionArray4 = NSMutableArray()
+        sectionArray4.addObject(cellModel6)
+        sectionArray4.addObject(cellModel7)
+        sectionArray4.addObject(cellModel8)
+
+        self.tableData?.addObject(sectionArray3)
+        self.tableData?.addObject(sectionArray4)
         self.tableData?.addObject(sectionArray1)
         self.tableData?.addObject(sectionArray2)
         
@@ -85,19 +114,53 @@ class MeController: UITableViewController {
         cell.textLabel?.text = cellModel.title
         cell.detailTextLabel?.text = cellModel.desc
         
+        
+        
+        if(indexPath.section == 0) {
+            
+            
+            let imageView = UIImageView(image: nil)
+            cell.contentView.addSubview(imageView)
+            cell.accessoryType = UITableViewCellAccessoryType.None
+
+            
+            imageView.snp_makeConstraints(closure: { (make) in
+                make.centerY.equalTo(cell.contentView)
+                make.right.equalTo(cell.contentView).offset(-18)
+                make.height.equalTo(60)
+                make.width.equalTo(60)
+            })
+            
+            Alamofire.request(.GET, cellModel.image).response { (request, response, data, error) in
+                imageView.image = UIImage(data: data!, scale:1)
+            }
+            
+            
+            
+        }
+        
         return cell
 
     }
     
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if(indexPath.section == 0) {
+            return 80
+        } else {
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath);
+        }
+    }
+    
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == 0) {
+        if (indexPath.section == 2) {
             let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
             let modifyController = ModifyController()
             modifyController.subTitle = cellModel.title
             modifyController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(modifyController, animated: true)
-        } else {
+        } else if (indexPath.section == 3) {
             let loginController = LoginController()
             let loginNavController = UINavigationController(rootViewController: loginController)
             UIView.transitionFromView(self.view, toView: loginController.view, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: { (Bool) -> Void in

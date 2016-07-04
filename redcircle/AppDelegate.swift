@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMReceiveMessageDelegat
     
 //    static let baseURLString = "http://localhost:8080"
     static let baseURLString = "http://redcircle.tiger.mopaasapp.com"
-//    static let baseURLString = "http://192.168.1.108:8080"
+//    static let baseURLString = "http://192.168.1.104:8080"
 
 
     var window: UIWindow?

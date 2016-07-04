@@ -261,7 +261,7 @@ class LoginController: UIViewController {
                 
             } else {
                 NSLog("错误信息：%@",error)
-                if ("18706734109" == self.userPhoneTextField?.text) {
+                if ("15891739884" == self.userPhoneTextField?.text) {
                     self.gotoHomeController()
                 }
             }

@@ -42,6 +42,7 @@
 		7FC634C71CAA63A800557D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC634C51CAA63A800557D9F /* Main.storyboard */; };
 		7FC634C91CAA63A800557D9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FC634C81CAA63A800557D9F /* Assets.xcassets */; };
 		7FC634CC1CAA63A800557D9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC634CA1CAA63A800557D9F /* LaunchScreen.storyboard */; };
+		7FC75DE91D26571A0051C736 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC75DE81D26571A0051C736 /* BookTableViewCell.swift */; };
 		7FD535331CB39EF4007D23C7 /* MeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD535321CB39EF4007D23C7 /* MeController.swift */; };
 		7FD535351CB39F46007D23C7 /* BookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD535341CB39F46007D23C7 /* BookController.swift */; };
 		7FD6928F1CAA7D3900D17E7B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD6928E1CAA7D3900D17E7B /* LoginController.swift */; };
@@ -93,6 +94,7 @@
 		7FC634C81CAA63A800557D9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FC634CB1CAA63A800557D9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FC634CD1CAA63A800557D9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FC75DE81D26571A0051C736 /* BookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		7FD535321CB39EF4007D23C7 /* MeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeController.swift; sourceTree = "<group>"; };
 		7FD535341CB39F46007D23C7 /* BookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookController.swift; sourceTree = "<group>"; };
 		7FD6928E1CAA7D3900D17E7B /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		7FC634C01CAA63A800557D9F /* redcircle */ = {
 			isa = PBXGroup;
 			children = (
+				7FC75DE71D2656EB0051C736 /* view */,
 				7F16CF0C1CB632CD004A74F5 /* model */,
 				617F96881CB544C00032BF1C /* doc */,
 				7FC634C11CAA63A800557D9F /* AppDelegate.swift */,
@@ -213,6 +216,14 @@
 				614446411CF19FD700854804 /* AddFriendController.swift */,
 			);
 			path = redcircle;
+			sourceTree = "<group>";
+		};
+		7FC75DE71D2656EB0051C736 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7FC75DE81D26571A0051C736 /* BookTableViewCell.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		8823B7E62FEB0498DCB66355 /* Frameworks */ = {
@@ -258,6 +269,7 @@
 				7FC634BC1CAA63A800557D9F /* Resources */,
 				DD469B20B01A4FC317FF4FD5 /* 📦 Embed Pods Frameworks */,
 				4CC0C752FEBB28213F4B110C /* 📦 Copy Pods Resources */,
+				D0559C20B6BA21B25866FB72 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -346,6 +358,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-redcircle/Pods-redcircle-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D0559C20B6BA21B25866FB72 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-redcircle/Pods-redcircle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DD469B20B01A4FC317FF4FD5 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FC75DE91D26571A0051C736 /* BookTableViewCell.swift in Sources */,
 				7FFB63741CAB5C5F008C7AAD /* RegisterController.swift in Sources */,
 				614446421CF19FD700854804 /* AddFriendController.swift in Sources */,
 				7FFB637A1CAB9BB5008C7AAD /* FriendController.swift in Sources */,

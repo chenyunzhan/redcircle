@@ -35,7 +35,8 @@ class BookController: UITableViewController {
         
         self.title = "朋友"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加朋友", style: .Done, target: self, action: #selector(addRootFriend));
-        
+        self.tableView.registerClass(BookTableViewCell.classForCoder(), forCellReuseIdentifier: BookTableViewCell.cellID())
+
         
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
         let mePhone = userDic!["mePhone"]
@@ -62,18 +63,20 @@ class BookController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let  cell = tableView.dequeueReusableCellWithIdentifier(BookTableViewCell.cellID(), forIndexPath: indexPath) as! BookTableViewCell
         let friends = self.tableData[indexPath.section]
         let ffriend = friends["ffriend"].arrayValue
         let friend = ffriend[indexPath.row]
+        cell.cellForModel(friend)
+//        let ffriend = friends["ffriend"].arrayValue
+//        let friend = ffriend[indexPath.row]
+//        
+//        
+//        let cell = UITableViewCell()
+
+
         
         
-        let cell = UITableViewCell()
-        let name = friend["name"].string
-        if name != "" {
-            cell.textLabel?.text = friend["name"].string
-        } else {
-            cell.textLabel?.text = friend["mePhone"].string
-        }
         return cell
     }
     
