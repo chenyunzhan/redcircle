@@ -161,11 +161,19 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
             print(response.result.value)
             if response.result.isSuccess {
                 let userDic = response.result.value as? NSDictionary
-                if (userDic!["name"] as! String == "") {
-                    completion?(RCUserInfo.init(userId: userId, name: userId, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId))
+                
+                if(userDic!["name"] != nil) {
+                    if (userDic!["name"] as! String == "") {
+                        completion?(RCUserInfo.init(userId: userId, name: userId, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId + "&type=thumbnail"))
+                    } else {
+                        completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as? String, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId + "&type=thumbnail"))
+                    }
                 } else {
-                    completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as? String, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId))
+                    
                 }
+                
+                
+
             } else {
                 completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))
             }

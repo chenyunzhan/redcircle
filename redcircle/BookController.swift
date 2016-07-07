@@ -99,24 +99,34 @@ class BookController: UITableViewController {
         
         let friends = self.tableData[indexPath.section]
         let ffriend = friends["ffriend"].arrayValue
+        let directFriend = friends["friend"]
         let friend = ffriend[indexPath.row]
         
         
-        //新建一个聊天会话View Controller对象
-        let chat = ChatController()
-        //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
-        chat.conversationType = RCConversationType.ConversationType_PRIVATE
-        //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
-        chat.targetId = friend["mePhone"].string
-        //设置聊天会话界面要显示的标题
-        if friend["name"].string != "" {
-            chat.title = friend["name"].string
+        
+        let userDetail = UserDetailController(style: .Grouped)
+        userDetail.friendPhone = friend["mePhone"].string
+        userDetail.mePhone = directFriend["friendPhone"].string
+        userDetail.hidesBottomBarWhenPushed = true
+        
+        
+        let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
+        if(directFriend["friendPhone"].string == userDic!["mePhone"] as? String) {
+            if ((friend["recommendLanguage"].string)?.characters.count > 0) {
+                self.navigationController?.pushViewController(userDetail, animated: true)
+            } else {
+                let modifyRelation = ModifyRelationController()
+                modifyRelation.friendPhone = friend["mePhone"].string
+                modifyRelation.mePhone = directFriend["friendPhone"].string
+                modifyRelation.initWithClosure(someFunctionThatTakesAClosure)
+                modifyRelation.hidesBottomBarWhenPushed = true
+
+                self.navigationController?.pushViewController(modifyRelation, animated: true)
+
+            }
         } else {
-            chat.title = friend["mePhone"].string
+            self.navigationController?.pushViewController(userDetail, animated: true)
         }
-        //显示聊天会话界面
-        chat.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(chat, animated: true)
     }
     
     

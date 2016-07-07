@@ -55,5 +55,6 @@ target 'redcircle' do
     pod 'SnapKit', '~> 0.15.0'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     pod 'SKPhotoBrowser'
+    pod 'ImagePickerSheetController', '~> 0.9.1'
 end
 

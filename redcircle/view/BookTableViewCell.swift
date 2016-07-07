@@ -32,6 +32,10 @@ class BookTableViewCell: UITableViewCell {
         descLabel.font = UIFont.systemFontOfSize(12)
 
         
+        let image = UIImage.fontAwesomeIconWithName(.Heartbeat, textColor: UIColor.lightGrayColor(), size: CGSizeMake(18, 18))
+        intimacyButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        intimacyButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        intimacyButton.setImage(image, forState: .Normal)
         
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(descLabel)
@@ -45,8 +49,8 @@ class BookTableViewCell: UITableViewCell {
         }
         
         intimacyButton.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(self.contentView).offset(8)
-            make.right.equalTo(self.contentView).offset(8)
+            make.centerY.equalTo(self.contentView)
+            make.right.equalTo(self.contentView).offset(-8)
         }
         
         descLabel.snp_makeConstraints { (make) -> Void in
