@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 
-class MeCircleController:  UITableViewController  {
+class MeCircleController:  UITableViewController {
     
     var circleLevel: String?
     var startNo: String?
@@ -21,13 +21,23 @@ class MeCircleController:  UITableViewController  {
     override func viewDidLoad() {
         
         
+        
+        if(circleLevel == "0") {
+            self.title = "相册"
+        } else if (circleLevel == "1") {
+            self.title = "朋友圈"
+        }
+        
         startNo = "0"
         
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
         mePhone = userDic!["mePhone"] as? String
         
         self.tableView.registerClass(ArticleTableViewCell.classForCoder(), forCellReuseIdentifier: ArticleTableViewCell.cellID())
-
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MeCircleController.addArticleAction))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(n), style: .Done, target: self, action: #selector(MeCircleController.addArticleAction))
+        
+        
         
         let parameters = [
             "mePhone": mePhone!,
@@ -52,6 +62,7 @@ class MeCircleController:  UITableViewController  {
         let  cell = tableView.dequeueReusableCellWithIdentifier(ArticleTableViewCell.cellID(), forIndexPath: indexPath) as! ArticleTableViewCell
 
         cell.cellForModel(article)
+
         
         return cell
     }
@@ -63,4 +74,13 @@ class MeCircleController:  UITableViewController  {
         
         return ArticleTableViewCell.heightForModel(article)
     }
+    
+    
+    func addArticleAction() {
+        let addArticle = AddArticleController()
+        self.navigationController?.pushViewController(addArticle, animated: true)
+    }
+    
+    
+
 }
