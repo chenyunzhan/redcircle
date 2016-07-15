@@ -10,22 +10,32 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 import SnapKit
+import ActiveLabel
 
 
 
-class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
     
+    
+    var controller: MeCircleController!
+
     
     var  nameLabel : UILabel!
-    var  contentLabel : UILabel!
+    var  contentLabel : ActiveLabel!
     var  commentButton : UIButton!
     var  photoImageView : UIImageView!
     var  imageCollectionView : UICollectionView!
+    var  commentTableView: UITableView!
     var  createLabel : UILabel!
     
     
     var  imageData : [String]?
+    var  commentData : [JSON]?
+    
     var  widthConstraint: Constraint?
+    var  heightConstraint: Constraint?
+    var  heightConstraintOfComment: Constraint?
+
 
     
     // 初始化cell
@@ -37,7 +47,9 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         
         // 头像img
         nameLabel = UILabel()
-        contentLabel = UILabel()
+        contentLabel = ActiveLabel()
+    
+        
         commentButton = UIButton()
         createLabel = UILabel()
         photoImageView = UIImageView()
@@ -47,7 +59,13 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         imageCollectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "CommandCell")
         imageCollectionView.backgroundColor = UIColor.clearColor()
         commentButton.setImage(UIImage(named: "bg_comment_pressed"), forState: .Normal)
-        
+        commentButton.addTarget(self, action: #selector(ArticleTableViewCell.addCommentToArticle), forControlEvents: .TouchUpInside)
+        commentTableView = UITableView()
+        commentTableView.delegate = self
+        commentTableView.dataSource = self
+        commentTableView.backgroundView = UIImageView.init(image: UIImage(named: "comment_table_back_image")?.resizableImageWithCapInsets(UIEdgeInsetsMake(20, 20, 5, 5)))
+        commentTableView.backgroundColor = UIColor.clearColor()
+        commentTableView.tableHeaderView = UIView(frame: CGRectMake(0,0,0,10))
         
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(photoImageView)
@@ -55,6 +73,7 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         self.contentView.addSubview(imageCollectionView)
         self.contentView.addSubview(createLabel)
         self.contentView.addSubview(commentButton)
+        self.contentView.addSubview(commentTableView)
 //        self.contentView.addSubview(tableView)
 
         
@@ -73,6 +92,7 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         contentLabel.snp_makeConstraints { (make) in
             make.top.equalTo(nameLabel.snp_bottom).offset(8)
             make.left.equalTo(photoImageView.snp_right).offset(8)
+            make.right.equalTo(-8)
 
         }
         
@@ -80,7 +100,14 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
             make.top.equalTo(contentLabel.snp_bottom).offset(8)
             make.left.equalTo(photoImageView.snp_right).offset(8)
             widthConstraint = make.width.equalTo(0).constraint
-            make.height.equalTo(80)
+            heightConstraint = make.height.equalTo(80).constraint
+        }
+        
+        commentTableView.snp_makeConstraints { (make) in
+            make.top.equalTo(createLabel.snp_bottom).offset(8)
+            make.left.equalTo(photoImageView.snp_right).offset(8)
+            make.right.equalTo(-8)
+            heightConstraintOfComment = make.height.equalTo(80).constraint
         }
         
         createLabel.snp_makeConstraints { (make) in
@@ -123,7 +150,14 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
             } else if(6 < count) {
                 row = 3
             }
-            return CGFloat(row * 80) + 120
+            
+            
+            let commentData = friend["comments"].array
+
+            
+            let myRect:CGRect = UIScreen.mainScreen().bounds;
+
+            return CGFloat(row * 80) + 120 + getLabHeigh(friend["content"].string!, font: UIFont.systemFontOfSize(17), width: myRect.width-72) + CGFloat(((commentData?.count)! * 20))
         }
         return 44
     }
@@ -132,6 +166,7 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     // 根据model 填充Cell
     func cellForModel(model: JSON?){
         if let friend = model {
+        
             
             if (friend["name"].string?.characters.count > 0) {
                 nameLabel.text = friend["name"].string
@@ -144,16 +179,54 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
             }
             
             
-            contentLabel.text = friend["content"].string
+            contentLabel.customize { label in
+                
+                
+                label.text = friend["content"].string?.stringByReplacingOccurrencesOfString("http", withString: " http")
+
+                
+                label.numberOfLines = 0
+                label.lineSpacing = 4
+                
+                label.textColor = UIColor(red: 102.0/255, green: 117.0/255, blue: 127.0/255, alpha: 1)
+                label.hashtagColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1)
+                label.mentionColor = UIColor(red: 238.0/255, green: 85.0/255, blue: 96.0/255, alpha: 1)
+                label.URLColor = UIColor(red: 85.0/255, green: 238.0/255, blue: 151.0/255, alpha: 1)
+                label.URLSelectedColor = UIColor(red: 82.0/255, green: 190.0/255, blue: 41.0/255, alpha: 1)
+                
+                label.handleMentionTap { self.alert("Mention", message: $0) }
+                label.handleHashtagTap { self.alert("Hashtag", message: $0) }
+                label.handleURLTap { self.alert("URL", message: $0.absoluteString) }
+            }
             
             createLabel.text = friend["created_at"].string
+            
+            
+            commentButton.titleLabel?.text = friend["id"].string
             
             let imageData = friend["images"].string?.componentsSeparatedByString("#")
             
             self.imageData = imageData
+            self.imageCollectionView .reloadData()
             
+            let commentData = friend["comments"].array
+            self.commentData = commentData
+            self.commentTableView.reloadData()
             
             widthConstraint?.updateOffset((self.imageData?.count)!*80-80)
+            
+            
+            if self.imageData?.count == 1 {
+                heightConstraint?.updateOffset(0)
+            } else {
+                heightConstraint?.updateOffset(80)
+            }
+
+            if self.commentData?.count == 0 {
+                heightConstraintOfComment?.updateOffset(0)
+            } else {
+                heightConstraintOfComment?.updateOffset((self.commentData?.count)! * 20 + 10)
+            }
         }
     }
     
@@ -209,7 +282,7 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         
         
         
-        let imageUrl = AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + self.imageData![indexPath.row]
+        let imageUrl = AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + self.imageData![indexPath.row] + "&type=thumbnail"
         Alamofire.request(.GET, imageUrl).response { (request, response, data, error) in
             imageView.image = UIImage(data: data!, scale:1)
         }
@@ -230,6 +303,74 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+    
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (self.commentData == nil) {
+            return 0
+        }
+        return (self.commentData?.count)!
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let comment = self.commentData![indexPath.row]
+        
+        let cell = UITableViewCell()
+        cell.backgroundColor = UIColor.clearColor()
+        cell.textLabel?.font = UIFont.systemFontOfSize(12)
+        
+        var commenterBy = comment["commenter_by_name"].string
+        if commenterBy == "" {
+            commenterBy = comment["commenter_by"].string
+        }
+        
+        var commenterTo = comment["commenter_to_name"].string
+        if commenterTo == "" {
+            commenterTo = comment["commenter_to"].string
+        }
+        
+        cell.textLabel?.text = commenterBy! + ": " + comment["content"].string!
+        
+        if commenterTo != nil {
+            cell.textLabel?.text = commenterBy! + "回复" + commenterTo! + ": " + comment["content"].string!
+        }
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 20
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        controller.keyboardTextField.show()
+        controller.keyboardTextField.hidden = false
+        controller.toComment = self.commentData![indexPath.row]
+    }
+    
+    class func getLabHeigh(labelStr:String,font:UIFont,width:CGFloat) -> CGFloat {
+        let statusLabelText: NSString = labelStr
+        let size = CGSizeMake(width, 900)
+        let dic = NSDictionary(object: font, forKey: NSFontAttributeName)
+        let strSize = statusLabelText.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context: nil).size
+        return strSize.height
+    }
+    
+    func alert(title: String, message: String) {
+        let url = NSURL(string: message)
+        UIApplication.sharedApplication().openURL(url!)
+    }
+    
+    
+    func addCommentToArticle(sender: UIButton) -> Void {
+        controller.keyboardTextField.show()
+        controller.keyboardTextField.hidden = false
+        controller.toComment = ["commenter_by":"","article_id":(sender.titleLabel?.text)!]
+        controller.indexOfArticle = self.tag
     }
     
 }

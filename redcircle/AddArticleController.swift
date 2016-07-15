@@ -9,6 +9,9 @@
 import Foundation
 import ImagePickerSheetController
 import Photos
+import SnapKit
+import Alamofire
+
 
 class AddArticleController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -18,6 +21,17 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
     var imageData : [String]?
     var originalImageArray : [String]?
     var thumbnailImageArray : [String]?
+    
+    var  heightConstraint: Constraint?
+    
+    //声明一个闭包
+    var myClosure:sendValueClosure?
+    //下面这个方法需要传入上个界面的someFunctionThatTakesAClosure函数指针
+    func initWithClosure(closure:sendValueClosure?){
+        //将函数指针赋值给myClosure闭包，该闭包中涵盖了someFunctionThatTakesAClosure函数中的局部变量等的引用
+        myClosure = closure
+    }
+
 
     override func viewDidLoad() {
         
@@ -26,6 +40,8 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .Done, target: self, action: #selector(AddArticleController.addArticle))
         
         imageData = ["add_article"]
+        originalImageArray = []
+        thumbnailImageArray = []
         
         scrollView = UIScrollView()
         scrollView.frame = self.view.frame
@@ -59,7 +75,7 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
             make.top.equalTo(textView.snp_bottom).offset(8)
             make.leading.equalTo(self.view).offset(8)
             make.trailing.equalTo(self.view).offset(-8)
-            make.height.equalTo(80)
+            heightConstraint = make.height.equalTo(300).constraint
         }
         
     }
@@ -83,10 +99,12 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
         
         let imageView = UIImageView()
         
-        
+        let addImage = self.imageData![indexPath.row]
+
         if indexPath.row == (self.imageData?.count)!-1 {
-            let addImage = self.imageData![indexPath.row]
             imageView.image = UIImage(named: addImage)
+        } else {
+            imageView.image = UIImage(contentsOfFile: addImage)
         }
         
         
@@ -110,7 +128,52 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
 
     
     func addArticle() -> Void {
+
+        let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
+        let mePhone = userDic!["mePhone"] as! String
+        let content = self.textView.text
         
+        //        let fileURL = NSBundle.mainBundle().URLForResource("photo_temp", withExtension: "png")
+        Alamofire.upload(
+            .POST,
+            AppDelegate.baseURLString + "/addArticle",
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(data:  mePhone.dataUsingEncoding(NSUTF8StringEncoding)!, name: "mePhone")
+                multipartFormData.appendBodyPart(data:  content.dataUsingEncoding(NSUTF8StringEncoding)!, name: "content")
+                
+                for index in 0...(self.thumbnailImageArray?.count)!-1 {
+                    let fileStr = self.originalImageArray![index]
+                    let fileURL = NSURL(fileURLWithPath: fileStr)
+                    
+                    let thumbnailFileStr = self.thumbnailImageArray![index]
+                    let thumbnailFileURL = NSURL(fileURLWithPath: thumbnailFileStr)
+                    
+                    multipartFormData.appendBodyPart(fileURL: fileURL, name: "sourceList")
+                    multipartFormData.appendBodyPart(fileURL: thumbnailFileURL, name: "thumbList")
+                
+                }
+                
+
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                        
+                        self.navigationController?.popViewControllerAnimated(true)
+                        
+                        //判空
+                        if (self.myClosure != nil){
+                            //闭包隐式调用someFunctionThatTakesAClosure函数：回调。
+                            self.myClosure!(string: "发布成功")
+                        }
+                    }
+                case .Failure(let encodingError):
+                    print(encodingError)
+                }
+            }
+        )
     }
     
     
@@ -142,7 +205,7 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
             }, secondaryHandler: { _, numberOfPhotos in
                 print("Comment \(numberOfPhotos) photos")
                 
-                for index in 0...self.imageData!.count-1 {
+                for index in 0...numberOfPhotos-1 {
 
                     let originalImage = controller.selectedImageAssets[index];
                     
@@ -153,6 +216,7 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
                     let options = PHImageRequestOptions()
                     options.resizeMode = PHImageRequestOptionsResizeMode.Exact
                     options.deliveryMode = PHImageRequestOptionsDeliveryMode.Opportunistic
+                    options.synchronous = true
                     
                     PHImageManager.defaultManager().requestImageForAsset(originalImage, targetSize: CGSizeMake(600, 600), contentMode: .AspectFill, options: options, resultHandler: { (image, info) in
                         
@@ -180,10 +244,16 @@ class AddArticleController: UIViewController, UICollectionViewDelegate, UICollec
                         data.writeToFile(filePath, atomically: true)
                         
                         self.thumbnailImageArray?.append(filePath)
-
+                        self.imageData?.insert(filePath, atIndex: 0)
                         
                     })
+                    
+                    
+                    
                 }
+                
+                self.collectionView.reloadData()
+
                 
         }))
         controller.addAction(ImagePickerAction(title: NSLocalizedString("从相册中选取", comment: "Action Title"), secondaryTitle: NSLocalizedString("从相册中选取", comment: "Action Title"), handler: { _ in

@@ -42,6 +42,8 @@
 		7F826F881D2E02AE00AE5BF0 /* ModifyRelationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F826F871D2E02AE00AE5BF0 /* ModifyRelationController.swift */; };
 		7F826F8A1D2E421E00AE5BF0 /* MeCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F826F891D2E421E00AE5BF0 /* MeCircleController.swift */; };
 		7F826F8C1D2E549600AE5BF0 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F826F8B1D2E549600AE5BF0 /* ArticleTableViewCell.swift */; };
+		7F8F51D11D38719E00928398 /* SYKeyboardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F51CF1D38719E00928398 /* SYKeyboardTextField.swift */; };
+		7F8F51D21D38719E00928398 /* UIView+SYAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F51D01D38719E00928398 /* UIView+SYAutoLayout.swift */; };
 		7F910DBA1D2CE2B200A281D3 /* UserDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F910DB91D2CE2B200A281D3 /* UserDetailController.swift */; };
 		7FB811701D2B89ED002B2DCA /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8116F1D2B89ED002B2DCA /* UIImage+Extension.swift */; };
 		7FC634C21CAA63A800557D9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC634C11CAA63A800557D9F /* AppDelegate.swift */; };
@@ -99,6 +101,8 @@
 		7F826F871D2E02AE00AE5BF0 /* ModifyRelationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyRelationController.swift; sourceTree = "<group>"; };
 		7F826F891D2E421E00AE5BF0 /* MeCircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeCircleController.swift; sourceTree = "<group>"; };
 		7F826F8B1D2E549600AE5BF0 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
+		7F8F51CF1D38719E00928398 /* SYKeyboardTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYKeyboardTextField.swift; sourceTree = "<group>"; };
+		7F8F51D01D38719E00928398 /* UIView+SYAutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SYAutoLayout.swift"; sourceTree = "<group>"; };
 		7F910DB91D2CE2B200A281D3 /* UserDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
 		7FB8116F1D2B89ED002B2DCA /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		7FC634BE1CAA63A800557D9F /* redcircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = redcircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,9 +190,19 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		7F8F51CE1D38719E00928398 /* SYKeyboardTextField */ = {
+			isa = PBXGroup;
+			children = (
+				7F8F51CF1D38719E00928398 /* SYKeyboardTextField.swift */,
+				7F8F51D01D38719E00928398 /* UIView+SYAutoLayout.swift */,
+			);
+			path = SYKeyboardTextField;
+			sourceTree = "<group>";
+		};
 		7FB8116E1D2B89CD002B2DCA /* util */ = {
 			isa = PBXGroup;
 			children = (
+				7F8F51CE1D38719E00928398 /* SYKeyboardTextField */,
 				7FB8116F1D2B89ED002B2DCA /* UIImage+Extension.swift */,
 				7F0AD95F1D34D89600F2F77F /* UtilManager.swift */,
 			);
@@ -426,6 +440,7 @@
 			files = (
 				7FC75DE91D26571A0051C736 /* BookTableViewCell.swift in Sources */,
 				7FFB63741CAB5C5F008C7AAD /* RegisterController.swift in Sources */,
+				7F8F51D11D38719E00928398 /* SYKeyboardTextField.swift in Sources */,
 				7F0AD9601D34D89600F2F77F /* UtilManager.swift in Sources */,
 				614446421CF19FD700854804 /* AddFriendController.swift in Sources */,
 				7F910DBA1D2CE2B200A281D3 /* UserDetailController.swift in Sources */,
@@ -433,6 +448,7 @@
 				7FC634C41CAA63A800557D9F /* HomeController.swift in Sources */,
 				7F16CF0E1CB632EB004A74F5 /* CellModel.swift in Sources */,
 				7FD6928F1CAA7D3900D17E7B /* LoginController.swift in Sources */,
+				7F8F51D21D38719E00928398 /* UIView+SYAutoLayout.swift in Sources */,
 				7FD535331CB39EF4007D23C7 /* MeController.swift in Sources */,
 				7FC634C21CAA63A800557D9F /* AppDelegate.swift in Sources */,
 				7FD535351CB39F46007D23C7 /* BookController.swift in Sources */,
