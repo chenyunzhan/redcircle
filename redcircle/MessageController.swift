@@ -152,6 +152,8 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         let x = arc4random() % 100;
         
         
+        print("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV")
+        
         
         let parameters = [
             "mePhone": userId,
@@ -169,7 +171,7 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
                         completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as? String, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId + "&type=thumbnail"))
                     }
                 } else {
-                    
+                    completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))
                 }
                 
                 

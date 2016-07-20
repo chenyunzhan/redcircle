@@ -66,6 +66,9 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         commentTableView.backgroundView = UIImageView.init(image: UIImage(named: "comment_table_back_image")?.resizableImageWithCapInsets(UIEdgeInsetsMake(20, 20, 5, 5)))
         commentTableView.backgroundColor = UIColor.clearColor()
         commentTableView.tableHeaderView = UIView(frame: CGRectMake(0,0,0,10))
+        commentTableView.tableFooterView = UIView(frame: CGRectMake(0,0,0,10))
+        commentTableView.separatorStyle = .None
+        commentTableView.scrollEnabled = false
         
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(photoImageView)
@@ -157,7 +160,7 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
             
             let myRect:CGRect = UIScreen.mainScreen().bounds;
 
-            return CGFloat(row * 80) + 120 + getLabHeigh(friend["content"].string!, font: UIFont.systemFontOfSize(17), width: myRect.width-72) + CGFloat(((commentData?.count)! * 20))
+            return CGFloat(row * 80) + 125 + getLabHeigh(friend["content"].string!, font: UIFont.systemFontOfSize(17), width: myRect.width-72) + CGFloat(((commentData?.count)! * 20))
         }
         return 44
     }
@@ -225,7 +228,7 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
             if self.commentData?.count == 0 {
                 heightConstraintOfComment?.updateOffset(0)
             } else {
-                heightConstraintOfComment?.updateOffset((self.commentData?.count)! * 20 + 10)
+                heightConstraintOfComment?.updateOffset((self.commentData?.count)! * 20 + 20)
             }
         }
     }
@@ -306,6 +309,11 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
     
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        controller.seeImages(imageData!, index: indexPath.row)
+    }
+    
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.commentData == nil) {
@@ -372,5 +380,8 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         controller.toComment = ["commenter_by":"","article_id":(sender.titleLabel?.text)!]
         controller.indexOfArticle = self.tag
     }
+    
+    
+
     
 }

@@ -117,7 +117,7 @@ public class SYKeyboardTextField: UIView {
     public lazy var rightButton = UIButton()
     
     
-    private var lastKeyboardFrame : CGRect = CGRectZero
+    public var lastKeyboardFrame : CGRect = CGRectZero
     
     public weak var delegate : SYKeyboardTextFieldDelegate?
     
@@ -127,7 +127,9 @@ public class SYKeyboardTextField: UIView {
         self.backgroundColor = UIColor.redColor()
         
         keyboardView.frame = self.bounds
-        keyboardView.backgroundColor = UIColor.yellowColor()
+        keyboardView.backgroundColor = UIColor.init(red: 248, green: 248, blue: 248, alpha: 1)
+        keyboardView.layer.borderWidth = 1
+        keyboardView.layer.borderColor = UIColor.lightGrayColor().CGColor
         keyboardView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         self.addSubview(keyboardView)
         
@@ -144,7 +146,10 @@ public class SYKeyboardTextField: UIView {
         
         textView.delegate = self
         textView.textColor = UIColor(white: 0.200, alpha: 1.000)
-        textView.backgroundColor = UIColor.greenColor()
+        textView.backgroundColor = UIColor.clearColor()
+        textView.layer.borderWidth = 1.0
+        textView.layer.cornerRadius = 4
+        textView.layer.borderColor = UIColor.lightGrayColor().CGColor
         textView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
         textView.scrollsToTop = false
         keyboardView.addSubview(textView)
@@ -155,7 +160,7 @@ public class SYKeyboardTextField: UIView {
         placeholderLabel.textColor = UIColor.lightGrayColor()
         placeholderLabel.font = textView.font;
         placeholderLabel.hidden = false
-        placeholderLabel.text = "placeholder"
+        placeholderLabel.text = "评论"
         textView.addSubview(placeholderLabel)
         
         
@@ -166,8 +171,9 @@ public class SYKeyboardTextField: UIView {
         keyboardView.addSubview(leftButton)
         
         rightButton.backgroundColor = UIColor.redColor()
+        rightButton.layer.cornerRadius = 4
         rightButton.titleLabel?.font = UIFont.systemFontOfSize(14.0)
-        rightButton.setTitle("Right", forState: UIControlState.Normal)
+        rightButton.setTitle("发送", forState: UIControlState.Normal)
         rightButton.addTarget(self, action: #selector(SYKeyboardTextField.rightButtonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         keyboardView.addSubview(rightButton)
         
@@ -400,8 +406,20 @@ extension SYKeyboardTextField {
                 print("keyboardFrame : \(keyboardFrame)")
             }
             
+            
+//            self.top = self.lastKeyboardFrame.origin.y - self.keyboardView.height
+
+
+            
             UIView.animateWithDuration(keyboardAnimationDuration, delay: 0.0, options: keyboardAnimationOptions, animations: { () -> Void in
-                self.top = self.lastKeyboardFrame.origin.y - self.keyboardView.height
+                
+                
+                if(self.hidden) {
+                    self.top = self.lastKeyboardFrame.origin.y - self.keyboardView.height
+                } else {
+                    self.top = self.lastKeyboardFrame.origin.y
+                }
+                
                 }, completion: nil)
             
         }

@@ -49,7 +49,7 @@ target 'redcircle' do
     pod 'Alamofire', '~> 3.0'
     pod 'MOBFoundation_IDFA'
     pod 'SMSSDK'
-    pod 'RongCloudIMKit', '2.4.0'
+    pod 'RongCloudIMKit', '2.6.6'
     pod 'SwiftyButton'
     pod 'FontAwesome.swift'
     pod 'SnapKit', '~> 0.15.0'

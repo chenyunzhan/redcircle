@@ -9,9 +9,10 @@
 import Alamofire
 import SwiftyJSON
 import DGElasticPullToRefresh
+import SKPhotoBrowser
 
 
-class MeCircleController:  UITableViewController {
+class MeCircleController:  UITableViewController, SKPhotoBrowserDelegate {
     
     var circleLevel: String?
     var startNo: String?
@@ -22,13 +23,15 @@ class MeCircleController:  UITableViewController {
     var keyboardTextField: SYKeyboardTextField!
     var toComment: JSON?
     var indexOfArticle: Int?
+    var keyboardheight : CGFloat!
 
     
     override func viewDidLoad() {
         
         
         
-
+        self.keyboardheight = 0
+        
         
         self.tableView.registerClass(ArticleTableViewCell.classForCoder(), forCellReuseIdentifier: ArticleTableViewCell.cellID())
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MeCircleController.addArticleAction))
@@ -66,14 +69,16 @@ class MeCircleController:  UITableViewController {
         
         self.tableView.tableFooterView = loadMoreLabel
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MeCircleController.keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MeCircleController.keyboardWillDisappear(_:)), name:UIKeyboardWillHideNotification, object: nil)
     }
     
     override func loadView() {
         super.loadView()
         keyboardTextField = SYKeyboardTextField(point: CGPointMake(0, 0), width: self.view.width)
         keyboardTextField.delegate = self
-        keyboardTextField.leftButtonHidden = false
+        keyboardTextField.leftButtonHidden = true
         keyboardTextField.rightButtonHidden = false
         keyboardTextField.autoresizingMask = [UIViewAutoresizing.FlexibleWidth , UIViewAutoresizing.FlexibleTopMargin]
         self.view.addSubview(keyboardTextField)
@@ -111,6 +116,10 @@ class MeCircleController:  UITableViewController {
     }
     
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     func addArticleAction() {
         let addArticle = AddArticleController()
         addArticle.initWithClosure(someFunctionThatTakesAClosure)
@@ -135,8 +144,12 @@ class MeCircleController:  UITableViewController {
         
         startNo = "0"
         
-        let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
-        mePhone = userDic!["mePhone"] as? String
+        
+        if(mePhone == nil) {
+            let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
+            mePhone = userDic!["mePhone"] as? String
+        }
+
         
         
         let parameters = [
@@ -187,15 +200,73 @@ class MeCircleController:  UITableViewController {
         {
             //触发上拉刷新
             self.loadMoreData()
+            
+
         }
+        
+        keyboardTextField.hide()
+
+
     }
     
     
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+//        keyboardTextField.top = scrollView.contentOffset.y + UIScreen.mainScreen().bounds.height - self.keyboardheight! - keyboardTextField.keyboardView.height    
         keyboardTextField.hide()
+
     }
     
     
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        keyboardTextField.top = scrollView.contentOffset.y + UIScreen.mainScreen().bounds.height         
+//        print(String(keyboardTextField.top) + "@@@@@@@@@@@@@@@" + String(scrollView.contentOffset.y) + "@@@@@@@@@@@@@@@@" + String(keyboardTextField.keyboardView.height))
+        
+
+    }
+    
+    
+    func keyboardWillAppear(notification: NSNotification) {
+        
+        // 获取键盘信息
+        let keyboardinfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
+        
+        let keyboardheight:CGFloat = (keyboardinfo?.CGRectValue.size.height)!
+        
+        
+        self.keyboardheight = keyboardheight
+        
+        print("键盘弹起")
+        
+        print(keyboardheight)
+        
+    }
+    
+    func keyboardWillDisappear(notification:NSNotification){
+        
+        print("键盘落下")
+    }
+    
+    
+    func seeImages(imageData: [String], index: Int) -> Void {
+        var images = [SKPhoto]()
+        
+        
+        for imageStr in imageData {
+            if (imageStr != "") {
+                let photo = SKPhoto.photoWithImageURL(AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + imageStr)
+                images.append(photo)
+            }
+
+        }
+
+        
+        // create PhotoBrowser Instance, and present.
+        let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(index)
+        browser.delegate = self
+        presentViewController(browser, animated: true, completion: {})
+    }
 
 
 }
@@ -206,28 +277,43 @@ extension MeCircleController : SYKeyboardTextFieldDelegate {
     func keyboardTextFieldPressReturnButton(keyboardTextField: SYKeyboardTextField) {
 //        UIAlertView(title: "", message: "Action", delegate: nil, cancelButtonTitle: "OK").show()
         keyboardTextField.hide()
-
+        self.sendComment()
         
+
+    }
+    
+    func keyboardTextFieldDidHide(keyboardTextField :SYKeyboardTextField) {
+        keyboardTextField.hidden = true
+    }
+    
+    
+    func keyboardTextFieldPressRightButton(keyboardTextField :SYKeyboardTextField) {
+        keyboardTextField.hide()
+        self.sendComment()
+    }
+    
+    
+    func sendComment() -> Void {
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
-//        let parameters = [
-//            "mePhone": self.userPhoneTextField?.text as! AnyObject,
-//            ]
+        //        let parameters = [
+        //            "mePhone": self.userPhoneTextField?.text as! AnyObject,
+        //            ]
         
         let parameters = [
             "articleId": self.toComment!["article_id"].string,
             "content": keyboardTextField.text,
             "commentBy": userDic!["mePhone"] as! String,
             "commentTo": self.toComment!["commenter_by"].string
-            ]
-//        Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
-
+        ]
+        //        Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
+        
         
         Alamofire.request(.POST, AppDelegate.baseURLString + "/addComment", parameters: parameters).responseJSON { response in
             
             if(response.result.isSuccess) {
                 
-//                var article = self.tableData[self.indexOfArticle!]
-//                article["comments"].arrayObject = JSON(response.result.value!).arrayObject
+                //                var article = self.tableData[self.indexOfArticle!]
+                //                article["comments"].arrayObject = JSON(response.result.value!).arrayObject
                 
                 
                 self.tableData[self.indexOfArticle!]["comments"].arrayObject = JSON(response.result.value!).arrayObject
@@ -237,8 +323,5 @@ extension MeCircleController : SYKeyboardTextFieldDelegate {
         }
     }
     
-    func keyboardTextFieldDidHide(keyboardTextField :SYKeyboardTextField) {
-        keyboardTextField.hidden = true
-    }
     
 }

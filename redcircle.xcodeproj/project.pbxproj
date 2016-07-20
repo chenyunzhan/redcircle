@@ -583,7 +583,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eda3fec1-5708-4798-b5a6-c316add0fdc5";
+				PROVISIONING_PROFILE = "18606a57-81fc-4af1-a1f5-59707bd8ca93";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -603,7 +603,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eda3fec1-5708-4798-b5a6-c316add0fdc5";
+				PROVISIONING_PROFILE = "18606a57-81fc-4af1-a1f5-59707bd8ca93";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

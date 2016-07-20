@@ -167,6 +167,12 @@ class UserDetailController: UITableViewController {
             modifyRelation.hidesBottomBarWhenPushed = true
             
             self.navigationController?.pushViewController(modifyRelation, animated: true)
+        } else if indexPath.section == 1 {
+            let meCircle = MeCircleController()
+            meCircle.circleLevel = "0"
+            meCircle.mePhone = friendPhone
+            meCircle.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(meCircle, animated: true)
         }
     }
     
