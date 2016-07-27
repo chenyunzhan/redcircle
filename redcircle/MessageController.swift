@@ -86,7 +86,7 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
                     }
 
                 } else {
-                    let alertController = UIAlertController(title: "提示", message: response.result.error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                    let alertController = UIAlertController(title: "提示", message: response.result.error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                     let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
                     alertController.addAction(cancelAction)
                     self.presentViewController(alertController, animated: true, completion: nil)

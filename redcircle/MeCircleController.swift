@@ -158,10 +158,19 @@ class MeCircleController:  UITableViewController, SKPhotoBrowserDelegate {
             "startNo": startNo!
         ]
         Alamofire.request(.GET, AppDelegate.baseURLString + "/getArticles", parameters: parameters).responseJSON { response in
-            let tableData = JSON(response.result.value!).arrayValue
-            self.tableData = tableData
-            self.tableView.reloadData()
-            self.tableView.dg_stopLoading()
+            
+            if (response.result.isSuccess) {
+                let tableData = JSON(response.result.value!).arrayValue
+                self.tableData = tableData
+                self.tableView.reloadData()
+                self.tableView.dg_stopLoading()
+            } else {
+                let alertController = UIAlertController(title: "提示", message: response.result.error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+
 
         }
 

@@ -41,12 +41,22 @@ class BookController: UITableViewController {
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
         let mePhone = userDic!["mePhone"]
         Alamofire.request(.GET, AppDelegate.baseURLString + "/getFriends", parameters: ["mePhone": mePhone!!]).responseJSON { (response) -> Void in
-            print(response.result.value)
-            let tableData = JSON(response.result.value!).arrayValue
-            self.tableData = tableData
             
-            self.tableView.reloadData()
-            print(response.request)
+            if (response.result.isSuccess) {
+                print(response.result.value)
+                let tableData = JSON(response.result.value!).arrayValue
+                self.tableData = tableData
+                
+                self.tableView.reloadData()
+                print(response.request)
+            } else {
+                let alertController = UIAlertController(title: "提示", message: response.result.error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        
+
         }
         
         

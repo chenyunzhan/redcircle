@@ -69,6 +69,18 @@ class UserDetailController: UITableViewController {
                 let userDic = response.result.value as? NSDictionary
                 self.userDic = userDic
                 self.tableView.reloadData()
+                
+                
+                
+                if ((self.userDic!["me_phone"]?.isEqual(NSNull()))!) {
+                    
+                    self.tableView.tableFooterView?.hidden = true
+                    let alertController = UIAlertController(title: "提示", message: "该用户没有被激活", preferredStyle: UIAlertControllerStyle.Alert)
+                    let cancelAction = UIAlertAction(title: "确定", style: .Cancel, handler: nil)
+                    alertController.addAction(cancelAction)
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                }
             }
         }
         
@@ -123,8 +135,9 @@ class UserDetailController: UITableViewController {
         }
         
         
-        if (self.userDic != nil) {
+        if (self.userDic != nil && !(self.userDic!["me_phone"]?.isEqual(NSNull()))!) {
             if(indexPath.section == 0) {
+                
                 let imageUrl = AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + (self.userDic!["me_phone"] as! String + "&type=thumbnail")
                 Alamofire.request(.GET, imageUrl).response { (request, response, data, error) in
                     photoImageView.image = UIImage(data: data!, scale:1)
