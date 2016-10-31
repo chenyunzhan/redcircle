@@ -36,6 +36,11 @@ class BookController: UITableViewController {
         self.title = "朋友"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "添加朋友", style: .Done, target: self, action: #selector(addRootFriend));
         self.tableView.registerClass(BookTableViewCell.classForCoder(), forCellReuseIdentifier: BookTableViewCell.cellID())
+        if #available(iOS 9.0, *) {
+            self.tableView.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+            // Fallback on earlier versions
+        }
 
         
         let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
@@ -71,6 +76,8 @@ class BookController: UITableViewController {
         let ffriend = friends["ffriend"].arrayValue
         return ffriend.count
     }
+    
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let  cell = tableView.dequeueReusableCellWithIdentifier(BookTableViewCell.cellID(), forIndexPath: indexPath) as! BookTableViewCell

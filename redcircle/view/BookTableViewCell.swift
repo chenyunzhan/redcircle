@@ -77,6 +77,8 @@ class BookTableViewCell: UITableViewCell {
             
             if friend["recommendLanguage"].string != ""{
                 descLabel.text = "(" + friend["recommendLanguage"].string! + ")"
+            } else {
+                descLabel.text = ""
             }
         }
     }

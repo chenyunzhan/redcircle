@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A04CDBDC4FE61F0382A0269 /* Pods_redcircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B37679080477E3C1C6AA488 /* Pods_redcircle.framework */; };
 		610069B51CC1F19C0035E2F0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069B41CC1F19C0035E2F0 /* AssetsLibrary.framework */; };
 		610069B71CC1F1AD0035E2F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069B61CC1F1AD0035E2F0 /* AudioToolbox.framework */; };
 		610069B91CC1F1B40035E2F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610069B81CC1F1B40035E2F0 /* AVFoundation.framework */; };
@@ -58,9 +57,12 @@
 		7FD692911CAA7F4700D17E7B /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD692901CAA7F4700D17E7B /* MessageController.swift */; };
 		7FFB63741CAB5C5F008C7AAD /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB63731CAB5C5F008C7AAD /* RegisterController.swift */; };
 		7FFB637A1CAB9BB5008C7AAD /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB63791CAB9BB5008C7AAD /* FriendController.swift */; };
+		91BE9A0E3A0CD187FDBEEB10 /* Pods_redcircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3F6A1989C474B703717274 /* Pods_redcircle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E3F6A1989C474B703717274 /* Pods_redcircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_redcircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		383B80B9D618DA638639D958 /* Pods-redcircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.debug.xcconfig"; sourceTree = "<group>"; };
 		610069B41CC1F19C0035E2F0 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		610069B61CC1F1AD0035E2F0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		610069B81CC1F1B40035E2F0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -120,9 +122,7 @@
 		7FFB63731CAB5C5F008C7AAD /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		7FFB63751CAB78E5008C7AAD /* redcircle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "redcircle-Bridging-Header.h"; sourceTree = "<group>"; };
 		7FFB63791CAB9BB5008C7AAD /* FriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
-		860B370FCE230DCE6557479E /* Pods-redcircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.debug.xcconfig"; sourceTree = "<group>"; };
-		8B37679080477E3C1C6AA488 /* Pods_redcircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_redcircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9D85ED62815718989DB6351 /* Pods-redcircle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.release.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.release.xcconfig"; sourceTree = "<group>"; };
+		FBB007F960B8B359D6F5793F /* Pods-redcircle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.release.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,22 +152,13 @@
 				610069B91CC1F1B40035E2F0 /* AVFoundation.framework in Frameworks */,
 				610069B71CC1F1AD0035E2F0 /* AudioToolbox.framework in Frameworks */,
 				610069B51CC1F19C0035E2F0 /* AssetsLibrary.framework in Frameworks */,
-				4A04CDBDC4FE61F0382A0269 /* Pods_redcircle.framework in Frameworks */,
+				91BE9A0E3A0CD187FDBEEB10 /* Pods_redcircle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3B9C8589B9A7FC51BC7793DE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				860B370FCE230DCE6557479E /* Pods-redcircle.debug.xcconfig */,
-				F9D85ED62815718989DB6351 /* Pods-redcircle.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		617F96881CB544C00032BF1C /* doc */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,8 +205,8 @@
 			children = (
 				7FC634C01CAA63A800557D9F /* redcircle */,
 				7FC634BF1CAA63A800557D9F /* Products */,
-				3B9C8589B9A7FC51BC7793DE /* Pods */,
 				8823B7E62FEB0498DCB66355 /* Frameworks */,
+				87B887554F0AC2A618B6632B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -269,6 +260,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		87B887554F0AC2A618B6632B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				383B80B9D618DA638639D958 /* Pods-redcircle.debug.xcconfig */,
+				FBB007F960B8B359D6F5793F /* Pods-redcircle.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8823B7E62FEB0498DCB66355 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,7 +294,7 @@
 				610069B81CC1F1B40035E2F0 /* AVFoundation.framework */,
 				610069B61CC1F1AD0035E2F0 /* AudioToolbox.framework */,
 				610069B41CC1F19C0035E2F0 /* AssetsLibrary.framework */,
-				8B37679080477E3C1C6AA488 /* Pods_redcircle.framework */,
+				1E3F6A1989C474B703717274 /* Pods_redcircle.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -306,13 +306,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FC634D01CAA63A800557D9F /* Build configuration list for PBXNativeTarget "redcircle" */;
 			buildPhases = (
-				380744309AA9BC2D97F8C254 /* 📦 Check Pods Manifest.lock */,
+				B5A620CA045C47C2DCA29137 /* [CP] Check Pods Manifest.lock */,
 				7FC634BA1CAA63A800557D9F /* Sources */,
 				7FC634BB1CAA63A800557D9F /* Frameworks */,
 				7FC634BC1CAA63A800557D9F /* Resources */,
-				DD469B20B01A4FC317FF4FD5 /* 📦 Embed Pods Frameworks */,
-				4CC0C752FEBB28213F4B110C /* 📦 Copy Pods Resources */,
-				D0559C20B6BA21B25866FB72 /* Embed Pods Frameworks */,
+				C4ECB551B6F6CCF38B4EDE30 /* [CP] Embed Pods Frameworks */,
+				B99BC720D29F27FE52C0AED3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -336,6 +335,7 @@
 					7FC634BD1CAA63A800557D9F = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 8PWWXHNFJ7;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -371,29 +371,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		380744309AA9BC2D97F8C254 /* 📦 Check Pods Manifest.lock */ = {
+		B5A620CA045C47C2DCA29137 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4CC0C752FEBB28213F4B110C /* 📦 Copy Pods Resources */ = {
+		B99BC720D29F27FE52C0AED3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,29 +401,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-redcircle/Pods-redcircle-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D0559C20B6BA21B25866FB72 /* Embed Pods Frameworks */ = {
+		C4ECB551B6F6CCF38B4EDE30 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-redcircle/Pods-redcircle-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DD469B20B01A4FC317FF4FD5 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,7 +558,7 @@
 		};
 		7FC634D11CAA63A800557D9F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 860B370FCE230DCE6557479E /* Pods-redcircle.debug.xcconfig */;
+			baseConfigurationReference = 383B80B9D618DA638639D958 /* Pods-redcircle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -586,13 +571,14 @@
 				PROVISIONING_PROFILE = "18606a57-81fc-4af1-a1f5-59707bd8ca93";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		7FC634D21CAA63A800557D9F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9D85ED62815718989DB6351 /* Pods-redcircle.release.xcconfig */;
+			baseConfigurationReference = FBB007F960B8B359D6F5793F /* Pods-redcircle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -605,7 +591,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "18606a57-81fc-4af1-a1f5-59707bd8ca93";
 				SWIFT_OBJC_BRIDGING_HEADER = "redcircle/redcircle-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

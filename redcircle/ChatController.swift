@@ -24,7 +24,7 @@ class ChatController: RCConversationViewController, SKPhotoBrowserDelegate {
 //        let rightImage = UIImage.fontAwesomeIconWithName(.PaperPlaneO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
         
         let mannersDic = NSUserDefaults.standardUserDefaults().objectForKey("MANNERS_INFO")
-        
+
         
         if mannersDic == nil {
             

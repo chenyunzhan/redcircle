@@ -76,6 +76,12 @@ class MeController: UITableViewController, UIImagePickerControllerDelegate, UINa
         self.tableData = NSMutableArray()
         
         
+        if #available(iOS 9.0, *) {
+            self.tableView.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+            // Fallback on earlier versions
+        }
+        
         let sectionArray1 = NSMutableArray()
         sectionArray1.addObject(cellModel1)
         sectionArray1.addObject(cellModel3)

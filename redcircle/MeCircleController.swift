@@ -36,7 +36,11 @@ class MeCircleController:  UITableViewController, SKPhotoBrowserDelegate {
         self.tableView.registerClass(ArticleTableViewCell.classForCoder(), forCellReuseIdentifier: ArticleTableViewCell.cellID())
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MeCircleController.addArticleAction))
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(n), style: .Done, target: self, action: #selector(MeCircleController.addArticleAction))
-        
+        if #available(iOS 9.0, *) {
+            self.tableView.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+            // Fallback on earlier versions
+        }
         
         self.refreshData()
         
@@ -140,6 +144,8 @@ class MeCircleController:  UITableViewController, SKPhotoBrowserDelegate {
             self.title = "相册"
         } else if (circleLevel == "1") {
             self.title = "朋友圈"
+        } else if (circleLevel == "2") {
+            self.title = "红圈"
         }
         
         startNo = "0"
